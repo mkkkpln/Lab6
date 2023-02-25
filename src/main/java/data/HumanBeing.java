@@ -1,6 +1,9 @@
 package data;
 
+import managers.CollectionManager;
+
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class HumanBeing {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -15,11 +18,11 @@ public class HumanBeing {
     private Mood mood; //Поле не может быть null
     private Car car; //Поле может быть null
 
-    public HumanBeing(Long id, String name, Coordinates coordinates, java.time.LocalDate creationDate, Boolean realHero, boolean hasToothpick, float impactSpeed, String soundtrackName, float minutesOfWaiting, Mood mood, Car car) {
+    public HumanBeing(Long id, String name, Coordinates coordinates, Boolean realHero, boolean hasToothpick, float impactSpeed, String soundtrackName, float minutesOfWaiting, Mood mood, Car car) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = creationDate;
+        this.creationDate = java.time.LocalDate.now();
         this.realHero = realHero;
         this.hasToothpick = hasToothpick;
         this.impactSpeed = impactSpeed;
@@ -27,6 +30,10 @@ public class HumanBeing {
         this.minutesOfWaiting = minutesOfWaiting;
         this.mood = mood;
         this.car = car;
+    }
+
+    public HumanBeing(Long id){
+        this.id = id;
     }
 
     public Long getId() {
@@ -115,5 +122,18 @@ public class HumanBeing {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HumanBeing that = (HumanBeing) o;
+        return hasToothpick == that.hasToothpick && Float.compare(that.impactSpeed, impactSpeed) == 0 && Float.compare(that.minutesOfWaiting, minutesOfWaiting) == 0 && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(coordinates, that.coordinates) && Objects.equals(creationDate, that.creationDate) && Objects.equals(realHero, that.realHero) && Objects.equals(soundtrackName, that.soundtrackName) && mood == that.mood && Objects.equals(car, that.car);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, coordinates, creationDate, realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, mood, car);
     }
 }

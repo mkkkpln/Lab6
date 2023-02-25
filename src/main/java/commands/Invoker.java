@@ -13,14 +13,15 @@ public class Invoker {
 
     public Invoker(Environment environment, ICommand[] commands){
         this.environment = environment;
-//        for (ICommand command:commands) {
-//            commandHashMap.put(command.getName(), command);
-//        }
         commandHashMap.put("help", new Help(this));
         commandHashMap.put("clear", new Clear(environment.getCollectionManager()));
         commandHashMap.put("info", new Info());
-        commandHashMap.put("insert", new Insert());
+        commandHashMap.put("insert", new Insert(this));
+        commandHashMap.put("update", new UpdateID());
+        commandHashMap.put("removeKey", new RemoveKey());
+        commandHashMap.put("exit", new Exit());
     }
+
     public void executer(String message) {
         if (message.split(" ").length > 1) {
             System.setOut(System.out);

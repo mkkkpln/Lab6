@@ -12,8 +12,8 @@ public class Help implements ICommand{
 
     @Override
     public void execute(Environment environment, String message) {
-            for (ICommand s : invoker.getCommandHashMap().values()) {
-                System.out.println(s.getDescription());
+        for (ICommand s : invoker.getCommandHashMap().values()) {
+            System.out.println(s.getDescription());
         }
     }
 

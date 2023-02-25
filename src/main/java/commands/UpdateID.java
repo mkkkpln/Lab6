@@ -14,11 +14,11 @@ public class UpdateID implements ICommand {
 
     @Override
     public String getName() {
-        return null;
+        return "update";
     }
 
     @Override
     public String getDescription() {
-        return null;
+        return "update id {element} : обновить значение элемента коллекции, id которого равен заданному";
     }
 }

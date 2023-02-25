@@ -5,6 +5,7 @@ import utils.Environment;
 
 public class Info implements ICommand {
     private CollectionManager collectionManager;
+
     public Info() {
     }
 
@@ -13,8 +14,8 @@ public class Info implements ICommand {
         System.out.println("Ниже представлена вся информация о коллекции:");
         collectionManager = environment.getCollectionManager();
         System.out.println("Тип коллекции: " + this.collectionManager.getClass() + ".");
-        System.out.println("Дата инициализации коллекции: ");
-        System.out.println("Количество элементов: " );
+        System.out.println("Дата инициализации коллекции: " + this.collectionManager.getCreationDate() + ".");
+        System.out.println("Количество элементов: " + this.collectionManager.getHuman().size());
     }
 
     @Override

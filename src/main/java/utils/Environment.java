@@ -1,5 +1,6 @@
 package utils;
 
+import commands.ICommand;
 import managers.CollectionManager;
 
 import java.io.BufferedReader;
@@ -11,14 +12,15 @@ public class Environment {
     private BufferedReader bufferedReader;
     private PrintStream printStream;
     private ArrayList<String> history;
+    private ICommand[] allCommands;
 
 
-    public Environment(CollectionManager collectionManager, BufferedReader bufferedReader, PrintStream printStream, ArrayList<String> history){
+    public Environment(CollectionManager collectionManager, BufferedReader bufferedReader, PrintStream printStream, ArrayList<String> history, ICommand[] allCommands){
         this.collectionManager = collectionManager;
         this.bufferedReader = bufferedReader;
         this.printStream = printStream;
         this.history = history;
-
+        this.allCommands = allCommands;
     }
 
     public CollectionManager getCollectionManager() {
@@ -51,5 +53,13 @@ public class Environment {
 
     public void setHistory(ArrayList<String> history) {
         this.history = history;
+    }
+
+    public ICommand[] getAllCommands() {
+        return allCommands;
+    }
+
+    public void setAllCommands(ICommand[] allCommands) {
+        this.allCommands = allCommands;
     }
 }
