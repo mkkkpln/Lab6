@@ -1,34 +1,58 @@
 package commands;
 
 import data.HumanBeing;
-import managers.CollectionManager;
+import utils.EditUtil;
 import utils.Environment;
+import utils.WrongHeroException;
+import utils.WrongIdException;
 
-import java.util.HashMap;
+import java.io.IOException;
 
 public class Insert implements ICommand {
 
-    private Invoker invoker;
-    private CollectionManager collectionManager;
-    private String newKey;
-    private int intNewKey;
-    private HashMap<Integer, HumanBeing> human;
-
-    public Insert(Invoker invoker) {
-        this.invoker = invoker;
-    }
-
     @Override
     public void execute(Environment environment, String message) {
-        collectionManager = environment.getCollectionManager();
-        newKey = message;
-        intNewKey = Integer.parseInt(newKey);
-        // ниже 4 варианта, как я хочу добавить ключ к объекту HumanBeing, у которого есть только id
+        HumanBeing newHuman = new HumanBeing();
 
-        //this.collectionManager.human.put(intNewKey ); // как обратиться к коллекции людей через collectionManager
-        //this.collectionManager.setHuman(intNewKey, );
-        //this.collectionManager.getHuman().put(intNewKey);
-        //HumanBeing humanBeing = new HumanBeing()
+        Long id = 0L;
+
+        try {
+            id = EditUtil.keyParser(message, environment);
+        } catch (WrongIdException e) {
+            environment.getPrintStream().println("Invalid Id");
+            return;
+        }
+        newHuman.setId(id);
+
+
+        environment.getPrintStream().println("Is he a hero? type: \'yes\' or \'no\'");
+        boolean isHero = false;
+
+        for (int i = 0; i < 3; i++) {
+            try {
+                isHero = EditUtil.realHeroParser(environment.getBufferedReader().readLine());
+                break;
+            } catch (WrongHeroException e) {
+                environment.getPrintStream().println("The answer is 'yes' or 'no' ");
+                if(i==2){
+                    environment.getPrintStream().println("Command failed!");
+                    return;
+                }
+                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
+            } catch (IOException exception) {
+                environment.getPrintStream().println("Invalid input");
+                environment.getPrintStream().println("Command finished!!!");
+                if(i==2){
+                    environment.getPrintStream().println("Command failed!");
+                    return;
+                }
+            }
+        }
+        newHuman.setRealHero(isHero);
+
+        environment.getPrintStream().println(newHuman.getId());
+        environment.getPrintStream().println(newHuman.getRealHero());
+
     }
 
     @Override

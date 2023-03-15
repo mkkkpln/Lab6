@@ -2,7 +2,7 @@ package commands;
 
 import utils.Environment;
 
-public class ReplaceIfLowe implements ICommand {
+public class ReplaceIfLower implements ICommand {
     @Override
     public void execute(Environment environment, String message) {
 

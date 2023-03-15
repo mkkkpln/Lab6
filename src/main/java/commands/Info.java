@@ -15,7 +15,7 @@ public class Info implements ICommand {
         collectionManager = environment.getCollectionManager();
         System.out.println("Тип коллекции: " + this.collectionManager.getClass() + ".");
         System.out.println("Дата инициализации коллекции: " + this.collectionManager.getCreationDate() + ".");
-        System.out.println("Количество элементов: " + this.collectionManager.getHuman().size());
+        System.out.println("Количество элементов: " + this.collectionManager.getPeople().size());
     }
 
     @Override

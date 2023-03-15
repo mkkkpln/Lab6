@@ -5,7 +5,12 @@ import utils.Environment;
 public class Show implements ICommand {
     @Override
     public void execute(Environment environment, String message) {
-
+        if(environment.getCollectionManager().getPeople().size()>0){
+            environment.getPrintStream().println(environment.getCollectionManager().toString());
+        }
+        else{
+            environment.getPrintStream().println("Коллекция пуста!");
+        }
     }
 
     @Override

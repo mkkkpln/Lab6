@@ -10,11 +10,11 @@ public class PrintAscending implements ICommand {
 
     @Override
     public String getName() {
-        return "print_ascending";
+        return "printAscending";
     }
 
     @Override
     public String getDescription() {
-        return "print_ascending : вывести элементы коллекции в порядке возрастания";
+        return "printAscending : вывести элементы коллекции в порядке возрастания";
     }
 }

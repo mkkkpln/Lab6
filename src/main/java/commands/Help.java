@@ -4,16 +4,11 @@ import utils.Environment;
 
 
 public class Help implements ICommand{
-    private Invoker invoker;
-
-    public Help(Invoker invoker) {
-        this.invoker = invoker;
-    }
 
     @Override
     public void execute(Environment environment, String message) {
-        for (ICommand s : invoker.getCommandHashMap().values()) {
-            System.out.println(s.getDescription());
+        for (int i = 0; i <environment.getAllCommands().length; i++){
+            environment.getPrintStream().println(environment.getAllCommands()[i].getDescription());
         }
     }
 
@@ -27,11 +22,4 @@ public class Help implements ICommand{
         return "help : вывести справку по доступным командам";
     }
 
-    public Invoker getInvoker() {
-        return invoker;
-    }
-
-    public void setInvoker(Invoker invoker) {
-        this.invoker = invoker;
-    }
 }

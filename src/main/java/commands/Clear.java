@@ -6,10 +6,6 @@ import utils.Environment;
 public class Clear implements ICommand{
     private CollectionManager collectionManager;
 
-    public Clear(CollectionManager collectionManager) {
-        this.collectionManager = collectionManager;
-    }
-
     @Override
     public void execute(Environment environment, String message) {
         collectionManager = environment.getCollectionManager();

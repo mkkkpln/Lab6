@@ -7,19 +7,13 @@ import java.util.HashMap;
 public class Invoker {
     private Environment environment;
     private HashMap<String, ICommand> commandHashMap = new HashMap<>();
-    public HashMap<String, ICommand> getCommandHashMap() {
-        return commandHashMap;
-    }
+
 
     public Invoker(Environment environment, ICommand[] commands){
         this.environment = environment;
-        commandHashMap.put("help", new Help(this));
-        commandHashMap.put("clear", new Clear(environment.getCollectionManager()));
-        commandHashMap.put("info", new Info());
-        commandHashMap.put("insert", new Insert(this));
-        commandHashMap.put("update", new UpdateID());
-        commandHashMap.put("removeKey", new RemoveKey());
-        commandHashMap.put("exit", new Exit());
+        for (ICommand command:commands) {
+            commandHashMap.put(command.getName(), command);
+        }
     }
 
     public void executer(String message) {

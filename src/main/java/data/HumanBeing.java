@@ -1,7 +1,7 @@
 package data;
 
-import managers.CollectionManager;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,6 +17,8 @@ public class HumanBeing {
     private float minutesOfWaiting;
     private Mood mood; //Поле не может быть null
     private Car car; //Поле может быть null
+
+    public HumanBeing(){}
 
     public HumanBeing(Long id, String name, Coordinates coordinates, Boolean realHero, boolean hasToothpick, float impactSpeed, String soundtrackName, float minutesOfWaiting, Mood mood, Car car) {
         this.id = id;
@@ -85,11 +87,22 @@ public class HumanBeing {
     }
 
     public float getImpactSpeed() {
+
         return impactSpeed;
     }
 
     public void setImpactSpeed(float impactSpeed) {
-        this.impactSpeed = impactSpeed;
+        try{
+            if (impactSpeed > 491) {
+                throw new IOException("Максимальное значение поля: 491");
+            }
+            else {
+                this.impactSpeed = impactSpeed;;
+            }
+        }
+        catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public String getSoundtrackName() {
@@ -136,4 +149,23 @@ public class HumanBeing {
     public int hashCode() {
         return Objects.hash(id, name, coordinates, creationDate, realHero, hasToothpick, impactSpeed, soundtrackName, minutesOfWaiting, mood, car);
     }
+    @Override
+    public String toString() {
+        String answer ="";
+        answer+= String.format("ID : %d\n",id);
+        answer+= String.format("Имя : " + name + "\n");
+        answer+= String.format("Дата рождения : " + creationDate.toString() + "\n");
+        answer+= String.format("Скорость : %d\n", impactSpeed);
+        answer+= String.format("Название саундтрека : " + soundtrackName + "\n");
+        answer+= String.format("Минуты ожидания : %d\n", minutesOfWaiting);
+        answer+= String.format("Машина : " + car + "\n");
+        answer+= String.format("Настрение : " + mood + "\n");
+
+        return answer;
+    }
+
+    public int compareTo(HumanBeing o) {
+        return 0;
+    }
 }
+
