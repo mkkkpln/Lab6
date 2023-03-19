@@ -60,7 +60,7 @@ public class CollectionManager {
             HumanBeing human  = entry.getValue();
             answer += String.format("Элемент номер : %d\n", counter);
             counter++;
-            answer += String.format("Key = %l\n",key);
+            answer += String.format("Key : %s\n",key.toString());
             answer += String.format(human.toString()+"\n\n");
         }
         return answer;

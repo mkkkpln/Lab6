@@ -1,6 +1,7 @@
 package commands;
 
 import utils.Environment;
+import utils.WrongScriptException;
 
 import java.util.HashMap;
 
@@ -16,7 +17,7 @@ public class Invoker {
         }
     }
 
-    public void executer(String message) {
+    public void executer(String message) throws WrongScriptException {
         if (message.split(" ").length > 1) {
             System.setOut(System.out);
             String[] mem = message.split(" ");

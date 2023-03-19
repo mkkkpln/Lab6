@@ -13,7 +13,15 @@ public class Environment {
     private PrintStream printStream;
     private ArrayList<String> history;
     private ICommand[] allCommands;
+    private long pointer;
 
+    public long getPointer() {
+        return pointer;
+    }
+
+    public void setPointer(long pointer) {
+        this.pointer = pointer;
+    }
 
     public Environment(CollectionManager collectionManager, BufferedReader bufferedReader, PrintStream printStream, ArrayList<String> history, ICommand[] allCommands){
         this.collectionManager = collectionManager;
@@ -21,6 +29,7 @@ public class Environment {
         this.printStream = printStream;
         this.history = history;
         this.allCommands = allCommands;
+        this.pointer = 0;
     }
 
     public CollectionManager getCollectionManager() {
@@ -63,3 +72,4 @@ public class Environment {
         this.allCommands = allCommands;
     }
 }
+

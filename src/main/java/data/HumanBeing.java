@@ -1,21 +1,46 @@
 package data;
 
 
+import com.sun.istack.NotNull;
+
+import javax.xml.bind.annotation.XmlElement;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class HumanBeing {
+    @NotNull
+    @XmlElement(name = "id", required=true)
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @NotNull
+    @XmlElement(name = "name", required=true)
     private String name; //Поле не может быть null, Строка не может быть пустой
+    @NotNull
+    @XmlElement(name = "coordinates", required=true)
     private Coordinates coordinates; //Поле не может быть null
+    @NotNull
+    @XmlElement(name = "creationDate", required=true)
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    @NotNull
+    @XmlElement(name = "realHero", required=true)
     private Boolean realHero; //Поле не может быть null
+    @NotNull
+    @XmlElement(name = "hasToothpick", required=true)
     private boolean hasToothpick;
+    @NotNull
+    @XmlElement(name = "impactSpeed", required=true)
     private float impactSpeed; //Максимальное значение поля: 491
+    @NotNull
+    @XmlElement(name = "soundtrackName", required=true)
     private String soundtrackName; //Поле не может быть null
+    @NotNull
+    @XmlElement(name = "minutesOfWaiting", required=true)
     private float minutesOfWaiting;
+    @NotNull
+    @XmlElement(name = "mood", required=true)
     private Mood mood; //Поле не может быть null
+    @NotNull
+    @XmlElement(name = "car", required=true)
     private Car car; //Поле может быть null
 
     public HumanBeing(){}
@@ -155,11 +180,11 @@ public class HumanBeing {
         answer+= String.format("ID : %d\n",id);
         answer+= String.format("Имя : " + name + "\n");
         answer+= String.format("Дата рождения : " + creationDate.toString() + "\n");
-        answer+= String.format("Скорость : %d\n", impactSpeed);
+        answer+= String.format("Скорость : %.3f\n", impactSpeed);
         answer+= String.format("Название саундтрека : " + soundtrackName + "\n");
-        answer+= String.format("Минуты ожидания : %d\n", minutesOfWaiting);
-        answer+= String.format("Машина : " + car + "\n");
-        answer+= String.format("Настрение : " + mood + "\n");
+        answer+= String.format("Минуты ожидания : %.3f\n", minutesOfWaiting);
+        answer+= String.format("Машина : " + car.toString() + "\n");
+        answer+= String.format("Настроение : " + mood + "\n");
 
         return answer;
     }

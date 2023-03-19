@@ -1,25 +1,25 @@
 package commands;
 
 import data.HumanBeing;
-import utils.EditUtil;
-import utils.Environment;
-import utils.WrongHeroException;
-import utils.WrongIdException;
-
+import utils.*;
 import java.io.IOException;
 
 public class Insert implements ICommand {
 
     @Override
-    public void execute(Environment environment, String message) {
+    public void execute(Environment environment, String message) throws WrongScriptException {
         HumanBeing newHuman = new HumanBeing();
 
         Long id = 0L;
 
         try {
             id = EditUtil.keyParser(message, environment);
-        } catch (WrongIdException e) {
+        } catch (NumberFormatException exception){
             environment.getPrintStream().println("Invalid Id");
+            return;
+        }
+        catch (WrongIdException e) {
+            environment.getPrintStream().println("No such element");
             return;
         }
         newHuman.setId(id);
@@ -33,6 +33,9 @@ public class Insert implements ICommand {
                 isHero = EditUtil.realHeroParser(environment.getBufferedReader().readLine());
                 break;
             } catch (WrongHeroException e) {
+                if(environment.getPointer()>0){
+                    throw new WrongScriptException();
+                }
                 environment.getPrintStream().println("The answer is 'yes' or 'no' ");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
@@ -40,6 +43,9 @@ public class Insert implements ICommand {
                 }
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
             } catch (IOException exception) {
+                if(environment.getPointer()>0){
+                    throw new WrongScriptException();
+                }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().println("Command finished!!!");
                 if(i==2){

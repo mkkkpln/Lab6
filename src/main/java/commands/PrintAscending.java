@@ -1,10 +1,22 @@
 package commands;
 
+import data.HumanBeing;
 import utils.Environment;
+
+import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class PrintAscending implements ICommand {
     @Override
     public void execute(Environment environment, String message) {
+        SortedSet<Long> keys = new TreeSet<>(environment.getCollectionManager().getPeople().keySet());
+        for (Long key : keys){
+            environment.getPrintStream().println(environment.getCollectionManager().findByKey(key).toString());
+        }
+
+        environment.getPrintStream().println("Command finished!");
 
     }
 
@@ -18,3 +30,4 @@ public class PrintAscending implements ICommand {
         return "printAscending : вывести элементы коллекции в порядке возрастания";
     }
 }
+

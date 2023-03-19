@@ -23,3 +23,4 @@ public class Show implements ICommand {
         return "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
     }
 }
+
