@@ -6,6 +6,8 @@ import data.Coordinates;
 import data.HumanBeing;
 import data.Mood;
 import managers.CollectionManager;
+import org.xml.sax.SAXException;
+import utils.EditUtil;
 import utils.Environment;
 import utils.WrongScriptException;
 
@@ -13,6 +15,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,23 +28,18 @@ public class Main {
         CollectionManager manager = new CollectionManager();
 
         //Загрузим коллекцию из файла
-        String link = "me";
+        String link = "meme.xml";
 
         try {
-
-            FileInputStream fileInputStream = new FileInputStream(link);
-            JAXBContext jaxbContext = JAXBContext.newInstance(CollectionManager.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            manager = (CollectionManager) unmarshaller.unmarshal(fileInputStream);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден, плак-плак(((");
-        } catch (JAXBException e) {
-            e.printStackTrace();
+            manager = EditUtil.XMLParser(link);
+        } catch (ParserConfigurationException | IOException e) {
+            throw new RuntimeException(e);
+        } catch (SAXException e) {
+            throw new RuntimeException(e);
         }
 
 
-
+        /*
         // А давайте еще один элемент коллекции создадим, но руками. Для эксперимента.
         Car car = new Car();
         car.setName("Chevrolet Chevelle Malibu");
@@ -60,7 +58,7 @@ public class Main {
         realHumanBeing.setSoundtrackName("NightCall");
         realHumanBeing.setCreationDate(LocalDate.parse("1980-10-12"));
         manager.addPerson(realHumanBeing);
-
+*/
 
 
 
@@ -68,7 +66,7 @@ public class Main {
         ArrayList<String> history = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         PrintStream writer = new PrintStream(System.out);
-        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save()};
+        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save(), new UpdateID()};
         Environment environment = new Environment(manager, reader, writer, history, commands);
         Invoker invoker = new Invoker(environment, commands);
 
