@@ -5,7 +5,6 @@ import utils.Environment;
 
 import java.util.HashMap;
 import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class PrintAscending implements ICommand {

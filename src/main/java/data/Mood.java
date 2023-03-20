@@ -14,4 +14,8 @@ public enum Mood {
     public String toString() {
         return mean;
     }
+
+    public boolean compareTo(Mood moodBig, Mood moodSmall){
+        return (moodBig.toString().length() > moodSmall.toString().length());
+    }
 }
