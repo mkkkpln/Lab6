@@ -1,5 +1,9 @@
 package data;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 public class Car {
     private String name; //Поле может быть null
     private Boolean cool; //Поле может быть null
@@ -22,6 +26,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return name+"\t"+"cool : " + cool.toString();
+        return name + "\t" + "\ncool : " + cool.toString();
     }
 }

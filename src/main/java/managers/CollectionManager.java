@@ -1,10 +1,15 @@
 package managers;
 
 import data.HumanBeing;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CollectionManager {
     private HashMap<Long, HumanBeing> people;
     private final LocalDate creationDate = LocalDate.now();

@@ -1,28 +1,37 @@
 package commands;
 
 import data.HumanBeing;
+import data.Mood;
 import managers.CollectionManager;
 import utils.Environment;
 import utils.WrongScriptException;
+
+import java.util.*;
 
 public class PrintFieldDescendingMood implements ICommand {
     private CollectionManager collectionManager;
     private HumanBeing human;
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
-        collectionManager = environment.getCollectionManager();
-        try{
-            for (HumanBeing people : collectionManager.getPeople() ) {
-                if (people.getMood().compareTo(people.getMood(),human.getMood())){
-                    System.out.println(people.toString());
+
+        List<Mood> moodList = new ArrayList<>(List.of(Mood.values()));
+        Collections.sort(moodList, new Comparator<Mood>() {
+            @Override
+            public int compare(Mood o1, Mood o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+
+        for(int i = 0; i< moodList.size(); i++){
+            for(HashMap.Entry<Long, HumanBeing> entry : environment.getCollectionManager().getPeople().entrySet()){
+                if(entry.getValue().getMood().equals(moodList.get(i))){
+                    environment.getPrintStream().println(entry.getValue().toString());
                 }
             }
-        }catch (Exception e){
-            if(environment.getPointer()>0){
-                throw new WrongScriptException();
-            }
-            System.out.println("Исключение!");
+            environment.getPrintStream().println();
         }
+
+        environment.getPrintStream().println("Command finished");
     }
 
     @Override

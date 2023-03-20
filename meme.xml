@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="true"?>
+        -<collectionManager>
+            -<people>
+                -<entry>
+                      <key>1</key>
+                     -<value>
+                          <id>1</id>
+                          <name>Ryan Gosling</name>
+                         -<coordinates>
+                                <x>0.0</x>
+                                <y>0</y>
+                            </coordinates>
+                            <creationDate>1980-10-12</creationDate>
+                            <realHero>true</realHero>
+                            <hasToothpick>true</hasToothpick>
+                            <impactSpeed>186.0</impactSpeed>
+                            <soundtrackName>NightCall</soundtrackName>
+                            <minutesOfWaiting>5.0</minutesOfWaiting>
+                            <mood>CALM</mood>
+                            - <car>
+                                <cool>true</cool>
+                                <name>Chevrolet Chevelle Malibu</name>
+                            </car>
+                     </value>
+                </entry>
+            </people>
+            <creationDate/>
+        </collectionManager>

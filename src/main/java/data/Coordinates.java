@@ -1,11 +1,21 @@
 package data;
 
-import java.io.IOException;
+import jakarta.xml.bind.annotation.*;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+@XmlType(name = "Coordinates")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Coordinates {
+    @NotNull
+    @XmlElement(name = "x", required=true)
     private Float x; //Значение поля должно быть больше -598, Поле не может быть null
+    @NotNull
+    @XmlElement(name = "y", required=true)
     private Integer y; //Значение поля должно быть больше -67, Поле не может быть null
 
+    public Coordinates(){}
     public Coordinates(Float x, Integer y) {
         this.x = x;
         this.y = y;
@@ -46,4 +56,5 @@ public class Coordinates {
             System.err.println(e.getMessage());
         }
     }
+
 }

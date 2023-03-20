@@ -10,11 +10,11 @@ public class ReplaceIfLower implements ICommand {
 
     @Override
     public String getName() {
-        return "replace_if_lowe";
+        return "replaceIfLower";
     }
 
     @Override
     public String getDescription() {
-        return "replace_if_lowe null {element} : заменить значение по ключу, если новое значение меньше старого";
+        return "replaceIfLower null {element} : заменить значение по ключу, если новое значение меньше старого";
     }
 }

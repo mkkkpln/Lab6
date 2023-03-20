@@ -1,13 +1,18 @@
 package data;
 
 
-import com.sun.istack.NotNull;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.jetbrains.annotations.NotNull;
 
-import javax.xml.bind.annotation.XmlElement;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
-
+@XmlType(name = "HumanBeing")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HumanBeing {
     @NotNull
     @XmlElement(name = "id", required=true)
@@ -20,6 +25,7 @@ public class HumanBeing {
     private Coordinates coordinates; //Поле не может быть null
     @NotNull
     @XmlElement(name = "creationDate", required=true)
+    @XmlJavaTypeAdapter(utils.DateAdapter.class)
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     @NotNull
     @XmlElement(name = "realHero", required=true)
@@ -193,4 +199,3 @@ public class HumanBeing {
         return 0;
     }
 }
-
