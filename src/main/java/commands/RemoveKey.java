@@ -6,7 +6,6 @@ import utils.Environment;
 import utils.WrongIdException;
 import utils.WrongScriptException;
 
-import java.util.HashMap;
 
 public class RemoveKey implements ICommand {
     @Override
@@ -44,4 +43,3 @@ public class RemoveKey implements ICommand {
         return "removeKey null : удалить элемент из коллекции по его ключу";
     }
 }
-

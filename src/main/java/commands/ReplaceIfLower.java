@@ -32,7 +32,6 @@ public class ReplaceIfLower implements ICommand {
             return;
         }
 
-//
         HashMap<Long, HumanBeing> updatedMap = new HashMap<>();
 
         for (HashMap.Entry<Long, HumanBeing> entry : environment.getCollectionManager().getPeople().entrySet()){

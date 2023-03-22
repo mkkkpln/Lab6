@@ -125,14 +125,20 @@ public class Insert implements ICommand {
             try {
                 environment.getPrintStream().println("Enter Float x ");
                 String line = in.readLine();
-//                line.replace('.',',');
+                line.replace('.',',');
                 Scanner tmp = new Scanner(line);
                 x = tmp.nextFloat();
+                if (line.split(" ").length > 1) {
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    throw new IOException();
+
+                }
                 break;
             }catch (Exception e){
                 if(environment.getPointer()>0){
                     throw new WrongScriptException();
                 }
+
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
                     return;
@@ -148,6 +154,11 @@ public class Insert implements ICommand {
                 line.replace('.',',');
                 Scanner tmp = new Scanner(line);
                 y = tmp.nextInt();
+                if (line.split(" ").length > 1) {
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    throw new IOException();
+
+                }
                 break;
             } catch (Exception e){
                 if(environment.getPointer()>0){
@@ -209,6 +220,11 @@ public class Insert implements ICommand {
                 line.replace('.',',');
                 Scanner tmp = new Scanner(line);
                 speed = tmp.nextFloat();
+                if (line.split(" ").length > 1) {
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    throw new IOException();
+
+                }
                 break;
             }catch (Exception e){
                 if(environment.getPointer()>0){
@@ -236,6 +252,11 @@ public class Insert implements ICommand {
                 Scanner tmp = new Scanner(line);
                 time = tmp.nextFloat();
                 newHuman.setMinutesOfWaiting(time);
+                if (line.split(" ").length > 1) {
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    throw new IOException();
+
+                }
                 break;
             }catch (Exception e){
                 if(environment.getPointer()>0){

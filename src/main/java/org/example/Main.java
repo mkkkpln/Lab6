@@ -66,7 +66,7 @@ public class Main {
         ArrayList<String> history = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         PrintStream writer = new PrintStream(System.out);
-        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save(), new UpdateID()};
+        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save(), new UpdateID(), new PrintAscending()};
         Environment environment = new Environment(manager, reader, writer, history, commands);
         Invoker invoker = new Invoker(environment, commands);
 

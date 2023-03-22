@@ -43,12 +43,12 @@ public class RemoveGreater implements ICommand {
 
     @Override
     public String getName() {
-        return "remove_greater";
+        return "removeGreater";
     }
 
     @Override
     public String getDescription() {
-        return "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный";
+        return "removeGreater null : удалить из коллекции все элементы, превышающие заданный";
     }
 }
 

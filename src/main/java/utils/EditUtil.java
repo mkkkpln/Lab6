@@ -29,9 +29,9 @@ public class EditUtil {
         }
 
         if(environment.getCollectionManager().findByKey(key)==null){
-            return key;
+            throw new WrongIdException();
         }
-        throw new WrongIdException();
+        return key;
     }
 
 

@@ -319,7 +319,7 @@ public class UpdateID implements ICommand {
                     throw new WrongScriptException();
                 }
                 environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().println("Command finished!!!");
+                environment.getPrintStream().println("Command immediately finished!!!");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
                     return;
