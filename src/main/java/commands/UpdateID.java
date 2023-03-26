@@ -1,357 +1,147 @@
 package commands;
 
 import data.Car;
+import data.Coordinates;
 import data.HumanBeing;
 import data.Mood;
-import utils.*;
+import utils.Environment;
+import utils.WrongArgumentException;
+import utils.WrongScriptException;
+import validators.Validator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public class UpdateID implements ICommand {
-
-    public UpdateID() {
-    }
 
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
 
-        long id = 0;
+        // Переводим строку в число
+        if(Validator.keyParser(environment, message)==null){
+            return;
+        }
+        long id = Validator.keyParser(environment, message);
+        if(environment.getCollectionManager().findById(id)==null){
+            environment.getPrintStream().println("No such element\nCommand finished!");
+            return;
+        }
+        // Находим нужный объект из коллекции
+        HumanBeing newHuman = environment.getCollectionManager().findById(id);
 
+
+
+        environment.getPrintStream().println("Enter the name");
         try {
-            id = Long.parseLong(message);
-        }catch (Exception e){
-            if(environment.getPointer()>0){
-                throw new WrongScriptException();
-            }
-            environment.getPrintStream().println("Invalid input");
+            newHuman.setName(Validator.nameParser(environment));
+        } catch (WrongArgumentException e) {
+            // или не находим и выходим из команды
+            return;
         }
 
-        HumanBeing newHuman = environment.getCollectionManager().findByKey(id);
 
-        if(newHuman==null){
-            environment.getPrintStream().println("No such element! Command Finished");
+        // Он герой??
+        environment.getPrintStream().println("Is he a hero? type: 'yes' or 'no'");
+        boolean isHero = false;
+        try {
+            newHuman.setRealHero(Validator.parseBoolWithChecks(environment));
+        } catch (WrongArgumentException e) {
+            return;
+        }
+
+
+        //Устанавливаем настроение
+        environment.getPrintStream().println("Set Mood");
+        System.out.println(List.of(Mood.values()));
+        try {
+            newHuman.setMood(Validator.moodParser(environment));
+        } catch (WrongArgumentException e) {
+            return;
+        }
+
+
+        float x = 0f;
+        int y = 0;
+        //Запрашиваем координаты
+        environment.getPrintStream().println("Enter Float x");
+        try {
+            x = Validator.floatParser(environment);
+        } catch (WrongArgumentException e) {
+            return;
+        }
+        environment.getPrintStream().println("Enter Integer y");
+        try {
+            y = Validator.integerParser(environment);
+        } catch (WrongArgumentException e) {
+            return;
+        }
+        newHuman.setCoordinates(new Coordinates(x,y));
+
+
+        //Есть ли зубочистка?
+        environment.getPrintStream().println("Does he have a toothpick?? type:'yes' or 'no'");
+
+        try {
+            newHuman.setHasToothpick(Validator.parseBoolWithChecks(environment));
+        } catch (WrongArgumentException e) {
             return;
         }
 
 
 
-        environment.getPrintStream().println("Enter the name");
-        String name = "";
-
-        for (int i = 0; i < 3; i++){
-            try {
-                name = environment.getBufferedReader().readLine();
-                if(name == null || name.isEmpty() || name.split(" ").length == 0){
-                    throw new IOException();
-                }
-                name = EditUtil.nameParser(name);
-                break;
-
-            } catch (IOException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
-            } catch (WrongNameException e) {
-                environment.getPrintStream().println("Use onle A-Z or a-z");
-            }
+        //Устанавливаем скорость
+        environment.getPrintStream().println("Enter float speed");
+        try {
+            newHuman.setImpactSpeed(Validator.floatParser(environment));
+        } catch (WrongArgumentException e) {
+            return;
         }
 
 
-        newHuman.setName(name);
-
-
-        environment.getPrintStream().println("Is he a hero? type: \'yes\' or \'no\'");
-        boolean isHero = false;
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                isHero = EditUtil.boolParser(environment.getBufferedReader().readLine());
-                break;
-            } catch (WrongHeroException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("The answer is 'yes' or 'no' ");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            } catch (IOException exception) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().println("Command finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-            }
-        }
-
-
-        newHuman.setRealHero(isHero);
-
-
-
-
-        environment.getPrintStream().println("Set Mood");
-        System.out.println(List.of(Mood.values()));
-
-        Mood mood = Mood.CALM;
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                String input = environment.getBufferedReader().readLine();
-                mood = Mood.valueOf(input);
-                break;
-
-            } catch (IOException | NullPointerException | IllegalArgumentException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
-        }
-
-
-        newHuman.setMood(mood);
-
-
-        Float x= 0f;
-        Integer y = 0;
-        BufferedReader in = environment.getBufferedReader();
-        for (int i = 0; i < 3; i++) {
-            try {
-                environment.getPrintStream().println("Enter Float x ");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                x = tmp.nextFloat();
-                break;
-            }catch (Exception e){
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                System.out.println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            try {
-                environment.getPrintStream().println("Enter Integer y");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                y = tmp.nextInt();
-                break;
-            } catch (Exception e){
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
-        }
-
-
-
-
-        boolean hasToothPick = false;
-        environment.getPrintStream().println("Does he have a toothpick?? type: \'yes\' or \'no\'");
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                hasToothPick = EditUtil.boolParser(environment.getBufferedReader().readLine());
-                break;
-            } catch (WrongHeroException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("The answer is 'yes' or 'no' ");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            } catch (IOException exception) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().println("Command finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-            }
-        }
-
-        newHuman.setHasToothpick(hasToothPick);
-
-
-        Float speed = 0f;
-        for (int i = 0; i < 3; i++) {
-            try {
-                environment.getPrintStream().println("Enter Float speed");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                speed = tmp.nextFloat();
-                break;
-            }catch (Exception e){
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                System.out.println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
-        }
-
-        newHuman.setImpactSpeed(speed);
-
-
-        Float time;
+        //Устанавливаем время ожидания
         environment.getPrintStream().println("Enter minutes of waiting (float)");
 
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                environment.getPrintStream().println("Enter Float speed");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                time = tmp.nextFloat();
-                newHuman.setMinutesOfWaiting(time);
-                break;
-            }catch (Exception e){
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                System.out.println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
+        try {
+            newHuman.setMinutesOfWaiting(Validator.floatParser(environment));
+        } catch (WrongArgumentException e) {
+            return;
         }
 
 
-
+        //Устанавливаем саундтрек
         environment.getPrintStream().println("Enter the sondtrack name");
-        String musicName = "";
-
-        for (int i = 0; i < 3; i++){
-            try {
-                musicName = environment.getBufferedReader().readLine();
-                if(musicName == null || musicName.isEmpty() || musicName.split(" ").length == 0){
-                    throw new IOException();
-                }
-                break;
-
-            } catch (IOException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
-            }
+        try {
+            newHuman.setSoundtrackName(Validator.liteNameParser(environment));
+        } catch (WrongArgumentException e) {
+            return;
         }
 
-        newHuman.setSoundtrackName(musicName);
 
-
-
+        //Создаем машину
         environment.getPrintStream().println("Create a Car!!!!!");
-
-
         Car car = new Car();
         boolean isCool = false;
 
 
         environment.getPrintStream().println("Is it Cool???? 'yes' or 'no'");
-        for (int i = 0; i < 3; i++) {
-            try {
-                isCool = EditUtil.boolParser(environment.getBufferedReader().readLine());
-                break;
-            } catch (WrongHeroException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("The answer is 'yes' or 'no' ");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            } catch (IOException exception) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().println("Command immediately finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-            }
+        try {
+            isCool = Validator.parseBoolWithChecks(environment);
+        } catch (WrongArgumentException e) {
+            return;
         }
 
         environment.getPrintStream().println("type the name!");
         String carName = "";
-
-        for (int i = 0; i < 3; i++){
-            try {
-                carName = environment.getBufferedReader().readLine();
-                if(carName == null || carName.isEmpty() || carName.split(" ").length == 0){
-                    throw new IOException();
-                }
-                break;
-
-            } catch (IOException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    return;
-                }
-                environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
-            }
+        try {
+            carName = Validator.liteNameParser(environment);
+        } catch (WrongArgumentException e) {
+            return;
         }
+
+
         car.setName(carName);
         car.setCool(isCool);
         newHuman.setCar(car);
+        environment.getPrintStream().println("Command finished");
 
 
     }

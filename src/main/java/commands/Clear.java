@@ -4,11 +4,10 @@ import managers.CollectionManager;
 import utils.Environment;
 
 public class Clear implements ICommand{
-    private CollectionManager collectionManager;
 
     @Override
     public void execute(Environment environment, String message) {
-        collectionManager = environment.getCollectionManager();
+        CollectionManager collectionManager = environment.getCollectionManager();
         collectionManager.clearAllPeople();
         System.out.println("Collection is cleared.");
 

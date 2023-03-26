@@ -1,10 +1,8 @@
 package commands;
 
-import managers.CollectionManager;
 import utils.Environment;
 
 public class Exit implements ICommand{
-    private CollectionManager collectionManager;
     @Override
     public void execute(Environment environment, String message) {
         System.out.println("Программа завершена.");

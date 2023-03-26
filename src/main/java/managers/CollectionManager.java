@@ -7,6 +7,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -55,6 +56,14 @@ public class CollectionManager {
         this.people.remove(key);
     }
 
+    public HumanBeing findById(Long id){
+        for (Map.Entry<Long, HumanBeing> entry : people.entrySet()){
+            if(entry.getValue().getId().equals(id)){
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
 
     @Override
     public String toString() {

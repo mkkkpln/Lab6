@@ -1,36 +1,18 @@
 package commands;
 
-import data.Car;
 import data.HumanBeing;
-import data.Mood;
 import utils.*;
+import validators.Validator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 public class ReplaceIfLower implements ICommand {
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
-        Long id;
-        try {
-            id = EditUtil.keyParser(message, environment);
-        } catch (NumberFormatException exception){
-            if(environment.getPointer()>0){
-                throw new WrongScriptException();
-            }
-            environment.getPrintStream().println("Invalid Id");
+        if(Validator.keyParser(environment, message)==null){
             return;
         }
-        catch (WrongIdException e) {
-            if(environment.getPointer()>0){
-                throw new WrongScriptException();
-            }
-            environment.getPrintStream().println("no such element");
-            return;
-        }
+        long id = Validator.keyParser(environment, message);
 
         HashMap<Long, HumanBeing> updatedMap = new HashMap<>();
 
@@ -40,9 +22,8 @@ public class ReplaceIfLower implements ICommand {
             } else {
                 updatedMap.put(entry.getKey(), entry.getValue());
             }
-
             return;
-            }
+        }
         environment.getPrintStream().println("Command finished!");
 
     }

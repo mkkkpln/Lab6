@@ -1,9 +1,7 @@
 package commands;
 
-import data.HumanBeing;
 import utils.Environment;
 
-import java.util.HashMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -29,4 +27,3 @@ public class PrintAscending implements ICommand {
         return "printAscending : вывести элементы коллекции в порядке возрастания";
     }
 }
-

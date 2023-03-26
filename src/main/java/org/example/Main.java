@@ -1,43 +1,27 @@
 package org.example;
 
 import commands.*;
-import data.Car;
-import data.Coordinates;
-import data.HumanBeing;
-import data.Mood;
 import managers.CollectionManager;
 import org.xml.sax.SAXException;
-import utils.EditUtil;
+import utils.XmlUtil;
 import utils.Environment;
-import utils.WrongScriptException;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
+import utils.IO;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
-import java.time.LocalDate;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 
-        CollectionManager manager = new CollectionManager();
+        CollectionManager manager;
 
         //Загрузим коллекцию из файла
         String link = "meme.xml";
-
-        try {
-            manager = EditUtil.XMLParser(link);
-        } catch (ParserConfigurationException | IOException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
-            throw new RuntimeException(e);
-        }
-
+        manager = XmlUtil.XMLParser(link);
 
         /*
         // А давайте еще один элемент коллекции создадим, но руками. Для эксперимента.
@@ -61,32 +45,17 @@ public class Main {
 */
 
 
-
-
+        //Генерируем все необходимое для паттерна "Command"
         ArrayList<String> history = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         PrintStream writer = new PrintStream(System.out);
-        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save(), new UpdateID(), new PrintAscending()};
+        ICommand[] commands = new ICommand[]{new Help(), new Info(), new Exit(), new Clear(), new Show(), new Insert(), new SumOfImpactSpeed(), new RemoveKey(), new RemoveGreater(), new ReplaceIfLower(), new ExecuteScript(), new PrintFieldDescendingMood(), new Save(), new UpdateID(), new PrintAscending(), new RemoveLowerKey()};
         Environment environment = new Environment(manager, reader, writer, history, commands);
         Invoker invoker = new Invoker(environment, commands);
 
+        //запускаем программу
+        IO.commandReader(environment, invoker);
 
-        System.out.println("Type 'help' to see commands");
-        while(true){
-            try {
-                String userTyping = reader.readLine();
-                invoker.executer(userTyping);
-                history.add(userTyping.split(" ")[0]);
-            }
-            catch (IOException ex){
-                System.out.println("Incorrect input");
-            }
-            catch (NullPointerException exe){
-                System.out.println("No such command found");
-            } catch (WrongScriptException e) {
-                System.out.println("Script failed");
-            }
-        }
 
     }
 }
