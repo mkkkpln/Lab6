@@ -36,13 +36,13 @@ public class XmlUtil {
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(environment.getCollectionManager(),fileOutputStream);
-            System.out.println("Файл сохранен");
+            System.out.println("File is saved");
             return true;
         } catch (IOException e){
             if(environment.getPointer()>0){
                 throw new WrongScriptException();
             }
-            environment.getPrintStream().println("File not found");
+            environment.getPrintStream().println("File is not found");
             return false;
 
         } catch (PropertyException e) {

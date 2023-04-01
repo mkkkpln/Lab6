@@ -7,7 +7,13 @@ import utils.XmlUtil;
 public class Save implements ICommand {
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
-        XmlUtil.saveXmlFile(environment);
+
+        if (XmlUtil.saveXmlFile(environment)) {
+           environment.getPrintStream().println("Collection is saved");
+           }
+        else {
+            environment.getPrintStream().println("Collection is not saved");
+        }
     }
 
     @Override
