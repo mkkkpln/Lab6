@@ -20,6 +20,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EditUtil {
+    private static final char maxLetter = 0x7a; // Максимальное значение, которое допустимо при вводе слова (код таблицы ASCII)
+    private static final char minLetter = 0x41; // Минимальное значение, которое допустимо при вводе слова (код таблицы ASCII)
+
+
     public static Long keyParser(String word, Environment environment) throws WrongIdException, NumberFormatException {
         Long key = 0L;
         try {
@@ -40,14 +44,11 @@ public class EditUtil {
 
         for (int i = 0; i <chars.length ; i++) {
             chars[i] = name.charAt(i);
-            if((chars[i]<0x41 && chars[i]>0x7a && chars[i]!=' ') ){
+            if(((chars[i]< minLetter) && (chars[i] > maxLetter) && (chars[i]!=' ')) ){
                 throw new WrongNameException();
             }
         }
-
         return name;
-
-
     }
 
 
