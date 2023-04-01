@@ -323,7 +323,6 @@ public class HumanBuilder {
         car.setName(carName);
         car.setCool(isCool);
         newHuman.setCar(car);
-        environment.getPrintStream().println("Command finished!");
         return newHuman;
     }
 }

@@ -9,6 +9,7 @@ public class RemoveKey implements ICommand {
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
         if(Validator.keyParser(environment, message)==null){
+            System.out.println("Key is null - error.");
             return;
         }
         long id = Validator.keyParser(environment, message);

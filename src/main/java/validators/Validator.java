@@ -134,9 +134,8 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 y = tmp.nextInt();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    environment.getPrintStream().println("Try again!");
                     throw new IOException();
-
                 }
                 break;
             } catch (Exception e){
@@ -166,7 +165,7 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 x = tmp.nextFloat();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    environment.getPrintStream().println("Try again!");
                     throw new IOException();
 
                 }
