@@ -240,6 +240,6 @@ public class HumanBeing {
     }
 
     public int compareTo(HumanBeing o) {
-        return 0;
+        return (int) (this.id - o.getId());
     }
 }
