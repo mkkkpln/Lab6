@@ -9,7 +9,12 @@ public class Invoker {
     private Environment environment;
     private HashMap<String, ICommand> commandHashMap = new HashMap<>();
 
-
+    /**
+     * Class Invoker contains all the logic for linking all classes of the programme.
+     * Constructor is adding all commands in ICommand array.
+     * @param environment - среда, где хранится история, все команды, коллекция, поток вывода на экран
+     * @param commands - команды
+     */
     public Invoker(Environment environment, ICommand[] commands){
         this.environment = environment;
         for (ICommand command:commands) {
@@ -17,6 +22,10 @@ public class Invoker {
         }
     }
 
+    /**
+     * User word processing.
+     * @param message - сообщение, введённое в консоль
+     */
     public void executer(String message) throws WrongScriptException {
         if (message.split(" ").length > 1) {
             System.setOut(System.out);
