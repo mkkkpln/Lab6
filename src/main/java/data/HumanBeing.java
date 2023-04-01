@@ -82,7 +82,16 @@ public class HumanBeing {
     }
 
     public void setName(String name) {
-        this.name = name;
+        try {
+            if (name==null){
+                throw new IOException("You can not put NULL in name.");
+            }
+            else {
+                this.name=name;
+            }
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public Coordinates getCoordinates() {
@@ -90,7 +99,16 @@ public class HumanBeing {
     }
 
     public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+        try {
+            if (coordinates==null){
+                throw new IOException("You can not put NULL in coordinates.");
+            }
+            else {
+                this.coordinates=coordinates;
+            }
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public LocalDate getCreationDate() {
@@ -141,7 +159,16 @@ public class HumanBeing {
     }
 
     public void setSoundtrackName(String soundtrackName) {
-        this.soundtrackName = soundtrackName;
+        try {
+            if (soundtrackName==null){
+                throw new IOException("You can not put NULL in SoundTrack name.");
+            }
+            else {
+                this.soundtrackName=soundtrackName;
+            }
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public float getMinutesOfWaiting() {
@@ -157,7 +184,16 @@ public class HumanBeing {
     }
 
     public void setMood(Mood mood) {
-        this.mood = mood;
+        try {
+            if (mood==null){
+                throw new IOException("You can not put null in MOOD.");
+            }
+            else {
+                this.mood=mood;
+            }
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public Car getCar() {
@@ -165,7 +201,17 @@ public class HumanBeing {
     }
 
     public void setCar(Car car) {
-        this.car = car;
+        try {
+            if (car==null){
+                throw new IOException("You can not put null in CAR.");
+            }
+            else {
+                this.car=car;
+            }
+        }
+        catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override
