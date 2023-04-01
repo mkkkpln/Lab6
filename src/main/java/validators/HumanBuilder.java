@@ -13,9 +13,8 @@ import java.util.Scanner;
 
 public class HumanBuilder {
 
-    public HumanBeing buildHuman(Environment environment) throws WrongScriptException {
+    public HumanBeing buildHuman(Environment environment) throws WrongScriptException, BuilderException {
         HumanBeing newHuman = new HumanBeing();
-
 
         Long id = (long) (environment.getCollectionManager().getPeople().size()+1);
         newHuman.setId(id);
@@ -28,7 +27,7 @@ public class HumanBuilder {
             try {
                 name = environment.getBufferedReader().readLine();
                 if(name == null || name.isEmpty() || name.split(" ").length == 0){
-                    throw new IOException();
+                    throw new BuilderException();
                 }
                 name = EditUtil.nameParser(name);
                 break;
@@ -39,10 +38,15 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
             } catch (WrongNameException e) {
                 environment.getPrintStream().println("Use only A-Z or a-z");
+                if(i==2){
+                    environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
+                }
             }
         }
 
@@ -64,6 +68,7 @@ public class HumanBuilder {
                 environment.getPrintStream().println("The answer is 'yes' or 'no' ");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
             } catch (IOException exception) {
@@ -72,10 +77,7 @@ public class HumanBuilder {
                 }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().println("Command finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-
-                }
+                throw new BuilderException();
             }
         }
 
@@ -91,13 +93,13 @@ public class HumanBuilder {
                 String input = environment.getBufferedReader().readLine();
                 mood = Mood.valueOf(input);
                 break;
-
             } catch (IOException | NullPointerException | IllegalArgumentException e) {
                 if(environment.getPointer()>0){
                     throw new WrongScriptException();
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
 
                 }
                 environment.getPrintStream().println("Invalid input");
@@ -115,15 +117,7 @@ public class HumanBuilder {
         for (int i = 0; i < 3; i++) {
             try {
                 environment.getPrintStream().println("Enter Float x ");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                x = tmp.nextFloat();
-                if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
-                    throw new IOException();
-
-                }
+                x = Validator.floatParser(environment);
                 break;
             } catch (Exception e){
                 if(environment.getPointer()>0){
@@ -132,7 +126,7 @@ public class HumanBuilder {
 
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
+                    throw new BuilderException();
                 }
                 System.out.println("Invalid input");
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
@@ -157,6 +151,7 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
@@ -183,7 +178,7 @@ public class HumanBuilder {
                 environment.getPrintStream().println("The answer is 'yes' or 'no' ");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
             } catch (IOException exception) {
@@ -192,9 +187,7 @@ public class HumanBuilder {
                 }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().println("Command finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                }
+                throw new BuilderException();
             }
         }
 
@@ -204,16 +197,8 @@ public class HumanBuilder {
         Float speed = 0f;
         for (int i = 0; i < 3; i++) {
             try {
-                environment.getPrintStream().println("Enter Float speed");
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                speed = tmp.nextFloat();
-                if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
-                    throw new IOException();
-
-                }
+                environment.getPrintStream().println("Enter the speed (Float type)");
+                speed = Validator.floatParser(environment);
                 break;
             }catch (Exception e){
                 if(environment.getPointer()>0){
@@ -221,7 +206,7 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
+                    throw new BuilderException();
                 }
                 System.out.println("Invalid input");
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
@@ -236,16 +221,8 @@ public class HumanBuilder {
 
         for (int i = 0; i < 3; i++) {
             try {
-                String line = in.readLine();
-                line.replace('.',',');
-                Scanner tmp = new Scanner(line);
-                time = tmp.nextFloat();
+                time = Validator.floatParser(environment);
                 newHuman.setMinutesOfWaiting(time);
-                if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
-                    throw new IOException();
-
-                }
                 break;
             }catch (Exception e){
                 if(environment.getPointer()>0){
@@ -253,7 +230,7 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
+                    throw new BuilderException();
                 }
                 System.out.println("Invalid input");
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
@@ -269,7 +246,7 @@ public class HumanBuilder {
             try {
                 musicName = environment.getBufferedReader().readLine();
                 if(musicName == null || musicName.isEmpty() || musicName.split(" ").length == 0){
-                    throw new IOException();
+                    throw new BuilderException();
                 }
                 break;
 
@@ -279,6 +256,7 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
 
                 }
                 environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
@@ -308,6 +286,7 @@ public class HumanBuilder {
                 environment.getPrintStream().println("The answer is 'yes' or 'no' ");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
             } catch (IOException exception) {
@@ -316,10 +295,7 @@ public class HumanBuilder {
                 }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().println("Command finished!!!");
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-
-                }
+                throw new BuilderException();
             }
         }
 
@@ -340,7 +316,7 @@ public class HumanBuilder {
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
             }
@@ -350,9 +326,7 @@ public class HumanBuilder {
         newHuman.setCar(car);
         environment.getPrintStream().println("Command finished!");
         return newHuman;
-
-
-
     }
 }
+
 

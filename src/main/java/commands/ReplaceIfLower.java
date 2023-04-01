@@ -2,6 +2,7 @@ package commands;
 
 import data.HumanBeing;
 import utils.*;
+import validators.HumanBuilder;
 import validators.Validator;
 
 import java.util.HashMap;
@@ -14,18 +15,27 @@ public class ReplaceIfLower implements ICommand {
         }
         long id = Validator.keyParser(environment, message);
 
-        HashMap<Long, HumanBeing> updatedMap = new HashMap<>();
 
-        for (HashMap.Entry<Long, HumanBeing> entry : environment.getCollectionManager().getPeople().entrySet()){
-            if(entry.getKey()>(id)){
-                updatedMap.put(id, entry.getValue());
-            } else {
-                updatedMap.put(entry.getKey(), entry.getValue());
+        environment.getPrintStream().println("Enter new Id");
+        long newKey = Validator.keyReaderParser(environment);
+
+        if(id>newKey){
+            HumanBuilder humanBuilder = new HumanBuilder();
+            HumanBeing human = null;
+            try {
+                human = humanBuilder.buildHuman(environment);
+            } catch (BuilderException e) {
+                return;
             }
+            human.setId(newKey);
+            environment.getCollectionManager().removeById(id);
+            environment.getCollectionManager().addPerson(human);
+            environment.getPrintStream().println("Command finished!!!");
+        }
+        else {
+            environment.getPrintStream().println("id <= new value\nCommand finished. ");
             return;
         }
-        environment.getPrintStream().println("Command finished successfully!");
-
     }
 
     @Override
@@ -38,3 +48,4 @@ public class ReplaceIfLower implements ICommand {
         return "replaceIfLower null {element} : заменить значение по ключу, если новое значение меньше старого";
     }
 }
+

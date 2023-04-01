@@ -4,9 +4,11 @@ import data.Car;
 import data.Coordinates;
 import data.HumanBeing;
 import data.Mood;
+import utils.BuilderException;
 import utils.Environment;
 import utils.WrongArgumentException;
 import utils.WrongScriptException;
+import validators.HumanBuilder;
 import validators.Validator;
 
 import java.util.List;
@@ -26,134 +28,16 @@ public class UpdateID implements ICommand {
             return;
         }
 
-        // Находим нужный объект из коллекции
-        HumanBeing newHuman = environment.getCollectionManager().findById(id);
-
-        environment.getPrintStream().println("Enter the name");
+        HumanBuilder humanBuilder = new HumanBuilder();
+        HumanBeing human = null;
         try {
-            newHuman.setName(Validator.nameParser(environment));
-        } catch (WrongArgumentException e) {
-            // или не находим и выходим из команды
-            environment.getPrintStream().println("It is not a name. Command finished unsuccessfully!");
+            human = humanBuilder.buildHuman(environment);
+        } catch (BuilderException e) {
             return;
         }
-
-
-        // Он герой??
-        environment.getPrintStream().println("Is he a hero? type: 'yes' or 'no'");
-        boolean isHero = false;
-        try {
-            newHuman.setRealHero(Validator.parseBoolWithChecks(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("This is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        //Устанавливаем настроение
-        environment.getPrintStream().println("Set Mood");
-        System.out.println(List.of(Mood.values()));
-        try {
-            newHuman.setMood(Validator.moodParser(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect mood. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        float x = 0f;
-        int y = 0;
-        //Запрашиваем координаты
-        environment.getPrintStream().println("Enter Float x");
-        try {
-            x = Validator.floatParser(environment);
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-        environment.getPrintStream().println("Enter Integer y");
-        try {
-            y = Validator.integerParser(environment);
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-        newHuman.setCoordinates(new Coordinates(x,y));
-
-
-        //Есть ли зубочистка?
-        environment.getPrintStream().println("Does he have a toothpick? Type: 'yes' or 'no'");
-
-        try {
-            newHuman.setHasToothpick(Validator.parseBoolWithChecks(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-
-
-
-        //Устанавливаем скорость
-        environment.getPrintStream().println("Enter speed (float)");
-        try {
-            newHuman.setImpactSpeed(Validator.floatParser(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("This is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        //Устанавливаем время ожидания
-        environment.getPrintStream().println("Enter minutes of waiting (float)");
-
-        try {
-            newHuman.setMinutesOfWaiting(Validator.floatParser(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        //Устанавливаем саундтрек
-        environment.getPrintStream().println("Enter the soundtrack name");
-        try {
-            newHuman.setSoundtrackName(Validator.liteNameParser(environment));
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect name. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        //Создаем машину
-        environment.getPrintStream().println("Let's create a Car!");
-        Car car = new Car();
-        boolean isCool = false;
-
-
-        environment.getPrintStream().println("Is it Cool? Write 'yes' or 'no'");
-        try {
-            isCool = Validator.parseBoolWithChecks(environment);
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect type. Command finished unsuccessfully!");
-            return;
-        }
-
-        environment.getPrintStream().println("Type the name of your car!");
-        String carName = "";
-        try {
-            carName = Validator.liteNameParser(environment);
-        } catch (WrongArgumentException e) {
-            environment.getPrintStream().println("It is incorrect name. Command finished unsuccessfully!");
-            return;
-        }
-
-
-        car.setName(carName);
-        car.setCool(isCool);
-        newHuman.setCar(car);
-        environment.getPrintStream().println("Command finished successfully!");
-
-
+        human.setId(id);
+        environment.getCollectionManager().removeById(id);
+        environment.getCollectionManager().addPerson(human);
     }
 
     @Override

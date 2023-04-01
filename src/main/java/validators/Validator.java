@@ -5,7 +5,6 @@ import utils.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Validator {
@@ -33,6 +32,39 @@ public class Validator {
         return key;
     }
 
+    public static Long newKeyParser(Environment environment, String word) throws WrongScriptException {
+        long key;
+        try {
+            key = Long.parseLong(word);
+        } catch (NumberFormatException e) {
+            environment.getPrintStream().println("Invalid format\nCommand finished");
+            if(environment.getPointer()>0){
+                throw new WrongScriptException();
+            }
+            return null;
+        }
+        if(environment.getCollectionManager().findByKey(key)!=null){
+            environment.getPrintStream().println("Element already exists.\nCommand finished.");
+            if(environment.getPointer()>0){
+                throw new WrongScriptException();
+            }
+            return null;
+        }
+        return key;
+    }
+    public static Long keyReaderParser(Environment environment) throws WrongScriptException {
+        try {
+            String line = environment.getBufferedReader().readLine().trim();
+            return newKeyParser(environment, line);
+
+        } catch (IOException e) {
+            if(environment.getPointer()>1){
+                throw new WrongScriptException();
+            }
+            return null;
+        }
+    }
+
 
     public static String nameParser(String name) throws WrongNameException {
         char[] chars = new char[name.length()];
@@ -43,10 +75,7 @@ public class Validator {
                 throw new WrongNameException();
             }
         }
-
         return name;
-
-
     }
 
 
@@ -91,7 +120,6 @@ public class Validator {
         }
         return variable;
     }
-
 
     public static Integer integerParser(Environment environment) throws WrongScriptException, WrongArgumentException {
         BufferedReader in = environment.getBufferedReader();
@@ -233,5 +261,3 @@ public class Validator {
         return liteName;
     }
 }
-
-
