@@ -25,12 +25,7 @@ public class EditUtil {
 
 
     public static Long keyParser(String word, Environment environment) throws WrongIdException, NumberFormatException {
-        Long key = 0L;
-        try {
-            key = Long.parseLong(word);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
+        Long key = Long.parseLong(word);
 
         if(environment.getCollectionManager().findByKey(key)==null){
             throw new WrongIdException();

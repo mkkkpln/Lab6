@@ -12,11 +12,9 @@ public class Clear implements ICommand{
             environment.getPrintStream().println("No arguments expected");
             return;
         }
-
         CollectionManager collectionManager = environment.getCollectionManager();
         collectionManager.clearAllPeople();
         System.out.println("Collection is cleared. Command finished successfully.");
-
     }
 
     @Override

@@ -5,19 +5,19 @@ import commands.Invoker;
 import java.io.*;
 
 public class IO {
-    public static void commandReader(Environment environment, Invoker invoker){
+    public static void commandReader(Environment environment, Invoker invoker) {
         BufferedReader reader = environment.getBufferedReader();
         System.out.println("Type 'help' to see commands");
-        while(true){
+        while (true) {
             System.out.print("-> ");
             try {
                 String userTyping = reader.readLine();
                 invoker.executer(userTyping);
-            }
-            catch (IOException ex){
+            } catch (InterruptedIOException e) {
+                System.out.println("Error - ctrl+c \nCommand finished unsuccessfully");
+            } catch (IOException ex) {
                 System.out.println("Incorrect input and output");
-            }
-            catch (NullPointerException ex){
+            } catch (NullPointerException ex) {
                 System.out.println("No such command found");
             } catch (WrongScriptException ex) {
                 System.out.println("Script failed");

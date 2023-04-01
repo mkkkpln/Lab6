@@ -50,7 +50,6 @@ public class HumanBuilder {
             }
         }
 
-
         newHuman.setName(name);
 
 

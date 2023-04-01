@@ -5,7 +5,7 @@ import utils.Environment;
 public class Show implements ICommand {
     @Override
     public void execute(Environment environment, String message) {
-        if(environment.getCollectionManager().getPeople().size()>0){
+        if(!environment.getCollectionManager().getPeople().isEmpty()){
             environment.getPrintStream().println(environment.getCollectionManager().toString());
             environment.getPrintStream().println("Command finished successfully!");
         }

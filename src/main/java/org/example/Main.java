@@ -3,15 +3,11 @@ package org.example;
 import commands.*;
 import managers.CollectionManager;
 import org.xml.sax.SAXException;
-import utils.XmlUtil;
-import utils.Environment;
+import utils.*;
 import utils.IO;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
@@ -22,27 +18,6 @@ public class Main {
         //Загрузим коллекцию из файла
         String link = "meme.xml";
         manager = XmlUtil.XMLParser(link);
-
-        /*
-        // А давайте еще один элемент коллекции создадим, но руками. Для эксперимента.
-        Car car = new Car();
-        car.setName("Chevrolet Chevelle Malibu");
-        car.setCool(true);
-        HumanBeing realHumanBeing = new HumanBeing();
-        Long id = 1L;
-        realHumanBeing.setId(id);
-        realHumanBeing.setRealHero(true);
-        realHumanBeing.setName("Ryan Gosling");
-        realHumanBeing.setCar(car);
-        realHumanBeing.setCoordinates(new Coordinates(0f, 0));
-        realHumanBeing.setHasToothpick(true);
-        realHumanBeing.setMinutesOfWaiting(5f);
-        realHumanBeing.setImpactSpeed(186f);
-        realHumanBeing.setMood(Mood.CALM);
-        realHumanBeing.setSoundtrackName("NightCall");
-        realHumanBeing.setCreationDate(LocalDate.parse("1980-10-12"));
-        manager.addPerson(realHumanBeing);
-*/
 
 
         //Генерируем все необходимое для паттерна "Command"
