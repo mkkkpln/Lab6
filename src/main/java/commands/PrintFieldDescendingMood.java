@@ -24,7 +24,7 @@ public class PrintFieldDescendingMood implements ICommand {
             environment.getPrintStream().println();
         }
 
-        environment.getPrintStream().println("Command finished");
+        environment.getPrintStream().println("Command finished successfully");
     }
 
     @Override

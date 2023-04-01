@@ -9,10 +9,10 @@ public class Save implements ICommand {
     public void execute(Environment environment, String message) throws WrongScriptException {
 
         if (XmlUtil.saveXmlFile(environment)) {
-           environment.getPrintStream().println("Collection is saved");
+           environment.getPrintStream().println("Collection is saved. Command finished successfully.");
            }
         else {
-            environment.getPrintStream().println("Collection is not saved");
+            environment.getPrintStream().println("Collection is not saved. Command finished unsuccessfully");
         }
     }
 

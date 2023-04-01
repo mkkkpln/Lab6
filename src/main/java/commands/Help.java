@@ -10,6 +10,7 @@ public class Help implements ICommand{
         for (int i = 0; i <environment.getAllCommands().length; i++){
             environment.getPrintStream().println(environment.getAllCommands()[i].getDescription());
         }
+        environment.getPrintStream().println("Command finished successfully!");
     }
 
     @Override

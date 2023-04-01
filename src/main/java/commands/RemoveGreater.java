@@ -19,7 +19,7 @@ public class RemoveGreater implements ICommand {
                 environment.getCollectionManager().removeById(entry.getKey());
             }
         }
-        environment.getPrintStream().println("Command finished!");
+        environment.getPrintStream().println("Command finished successfully!");
 
     }
 

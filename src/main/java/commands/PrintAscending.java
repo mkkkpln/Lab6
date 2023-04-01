@@ -13,7 +13,7 @@ public class PrintAscending implements ICommand {
             environment.getPrintStream().println(environment.getCollectionManager().findByKey(key).toString());
         }
 
-        environment.getPrintStream().println("Command finished!");
+        environment.getPrintStream().println("Command finished successfully!");
 
     }
 

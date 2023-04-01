@@ -19,6 +19,7 @@ public class Insert implements ICommand {
         HumanBuilder humanBuilder = new HumanBuilder();
         HumanBeing human = humanBuilder.buildHuman(environment);
         environment.getCollectionManager().addPerson(human);
+        environment.getPrintStream().println("Command finished successfully!");
     }
 
     @Override

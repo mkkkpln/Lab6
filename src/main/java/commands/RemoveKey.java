@@ -13,7 +13,7 @@ public class RemoveKey implements ICommand {
         }
         long id = Validator.keyParser(environment, message);
         environment.getCollectionManager().removeById(id);
-        environment.getPrintStream().println("Command finished!");
+        environment.getPrintStream().println("Command finished successfully!");
 
     }
 

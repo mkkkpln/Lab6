@@ -22,7 +22,7 @@ public class UpdateID implements ICommand {
         }
         long id = Validator.keyParser(environment, message);
         if(environment.getCollectionManager().findById(id)==null){
-            environment.getPrintStream().println("No such element\nCommand finished!");
+            environment.getPrintStream().println("No such element \nCommand finished unsuccessfully!");
             return;
         }
         // Находим нужный объект из коллекции
@@ -117,19 +117,19 @@ public class UpdateID implements ICommand {
 
 
         //Создаем машину
-        environment.getPrintStream().println("Create a Car!!!!!");
+        environment.getPrintStream().println("Let's create a Car!");
         Car car = new Car();
         boolean isCool = false;
 
 
-        environment.getPrintStream().println("Is it Cool???? 'yes' or 'no'");
+        environment.getPrintStream().println("Is it Cool? Write 'yes' or 'no'");
         try {
             isCool = Validator.parseBoolWithChecks(environment);
         } catch (WrongArgumentException e) {
             return;
         }
 
-        environment.getPrintStream().println("type the name!");
+        environment.getPrintStream().println("Type the name of your car!");
         String carName = "";
         try {
             carName = Validator.liteNameParser(environment);
@@ -141,7 +141,7 @@ public class UpdateID implements ICommand {
         car.setName(carName);
         car.setCool(isCool);
         newHuman.setCar(car);
-        environment.getPrintStream().println("Command finished");
+        environment.getPrintStream().println("Command finished successfully!");
 
 
     }

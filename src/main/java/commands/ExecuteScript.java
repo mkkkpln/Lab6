@@ -12,6 +12,7 @@ public class ExecuteScript implements ICommand {
     @Override
     public void execute(Environment environment, String message) {
         IO.scriptReader(environment, message);
+        environment.getPrintStream().println("Command finished successfully!");
     }
 
     @Override

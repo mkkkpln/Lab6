@@ -24,7 +24,7 @@ public class ReplaceIfLower implements ICommand {
             }
             return;
         }
-        environment.getPrintStream().println("Command finished!");
+        environment.getPrintStream().println("Command finished successfully!");
 
     }
 

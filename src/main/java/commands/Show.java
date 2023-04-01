@@ -7,9 +7,10 @@ public class Show implements ICommand {
     public void execute(Environment environment, String message) {
         if(environment.getCollectionManager().getPeople().size()>0){
             environment.getPrintStream().println(environment.getCollectionManager().toString());
+            environment.getPrintStream().println("Command finished successfully!");
         }
         else{
-            environment.getPrintStream().println("Коллекция пуста!");
+            environment.getPrintStream().println("Collection is empty!");
         }
     }
 

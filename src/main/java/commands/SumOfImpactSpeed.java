@@ -12,8 +12,8 @@ public class SumOfImpactSpeed implements ICommand {
         for (Map.Entry<Long, HumanBeing> entry : environment.getCollectionManager().getPeople().entrySet()){
             sum += entry.getValue().getImpactSpeed();
         }
-        environment.getPrintStream().printf("Общая скорость элементов коллекции равна : %.3f\n", sum);
-        environment.getPrintStream().println("Команда завершена!");
+        environment.getPrintStream().printf("Sum of impact speed is : %.3f\n", sum);
+        environment.getPrintStream().println("Command finished successfully!");
     }
 
     @Override
