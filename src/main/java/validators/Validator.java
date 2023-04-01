@@ -232,7 +232,6 @@ public class Validator {
         }
         return liteName;
     }
-
 }
 
 

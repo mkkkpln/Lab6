@@ -1,11 +1,9 @@
 package data;
 
-
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.jetbrains.annotations.NotNull;
-
 
 import java.io.IOException;
 import java.time.LocalDate;

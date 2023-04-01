@@ -1,14 +1,19 @@
 package data;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
-
-
 public enum Mood {
-    SORROW,
-    GLOOM,
-    APATHY,
-    CALM;
+    SORROW ("Печальный"),
+    GLOOM ("Хмурый"),
+    APATHY ("Вялый"),
+    CALM ("Спокойный");
+
+    private String mean;
+    Mood(String name) {
+        this.mean = name;
+    }
+
+    @Override
+    public String toString() {
+        return mean;
+    }
 
 }

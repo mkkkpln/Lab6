@@ -79,10 +79,7 @@ public class HumanBuilder {
                 }
             }
         }
-
-
         newHuman.setRealHero(isHero);
-
 
 
 

@@ -121,8 +121,7 @@ public class XmlUtil {
                                                             int y = Integer.parseInt(variable.getTextContent());
                                                             coordinates.setY(y);
                                                         }
-                                                        default -> {
-                                                        }
+                                                        default -> {}
                                                     }
                                                 }
                                             }
@@ -150,14 +149,12 @@ public class XmlUtil {
                                                             car.setCool(cool);
                                                         }
                                                         case "name" -> car.setName(variable.getTextContent());
-                                                        default -> {
-                                                        }
+                                                        default -> {}
                                                     }
                                                 }
                                             }
                                         }
-                                        default -> {
-                                        }
+                                        default -> {}
                                     }
                                 }
                             }
