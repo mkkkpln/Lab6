@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Insert implements ICommand {
-
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
         HumanBuilder humanBuilder = new HumanBuilder();

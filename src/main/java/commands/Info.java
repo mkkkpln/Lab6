@@ -5,9 +5,6 @@ import utils.Environment;
 
 public class Info implements ICommand {
 
-    public Info() {
-    }
-
     @Override
     public void execute(Environment environment, String message) {
         System.out.println("Ниже представлена вся информация о коллекции:");
