@@ -15,7 +15,7 @@ public class IO {
                 invoker.executer(userTyping);
             }
             catch (IOException ex){
-                System.out.println("Incorrect input");
+                System.out.println("Incorrect input and output");
             }
             catch (NullPointerException ex){
                 System.out.println("No such command found");
@@ -38,12 +38,10 @@ public class IO {
                 userLine = bufferedReader.readLine();
             }
             environment.setPointer(environment.getPointer()-1);
-            return;
 
         } catch (FileNotFoundException e) {
-            environment.getPrintStream().println("File not found\nCommand finished");
+            environment.getPrintStream().println("File not found\nCommand finished unsuccessfully!");
             environment.setPointer(environment.getPointer()-1);
-            return;
         } catch (IOException e) {
             environment.setPointer(environment.getPointer()-1);
             throw new RuntimeException(e);
@@ -51,7 +49,6 @@ public class IO {
         } catch (WrongScriptException e) {
             environment.getPrintStream().println("Your script has errors!");
             environment.setPointer(environment.getPointer()-1);
-            return;
         }
     }
 

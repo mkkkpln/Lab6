@@ -42,7 +42,7 @@ public class HumanBuilder {
                 }
                 environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
             } catch (WrongNameException e) {
-                environment.getPrintStream().println("Use onle A-Z or a-z");
+                environment.getPrintStream().println("Use only A-Z or a-z");
             }
         }
 
@@ -64,7 +64,6 @@ public class HumanBuilder {
                 environment.getPrintStream().println("The answer is 'yes' or 'no' ");
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-
                 }
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);
             } catch (IOException exception) {
@@ -79,9 +78,8 @@ public class HumanBuilder {
                 }
             }
         }
+
         newHuman.setRealHero(isHero);
-
-
 
         environment.getPrintStream().println("Set Mood");
         System.out.println(List.of(Mood.values()));

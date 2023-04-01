@@ -52,7 +52,7 @@ public class XmlUtil {
             environment.getPrintStream().println("No property!");
             return false;
         } catch (JAXBException e) {
-            environment.getPrintStream().println("JAXB error... Call the programmer!!!");
+            environment.getPrintStream().println("JAXB error. Incorrect XML-document format or problems in the process of parsing and creating XML-document");
             return false;
         }
     }
