@@ -9,9 +9,6 @@ import java.util.*;
 
 public class PrintFieldDescendingMood implements ICommand {
 
-    public PrintFieldDescendingMood() {
-    }
-
     @Override
     public void execute(Environment environment, String message) throws WrongScriptException {
 
