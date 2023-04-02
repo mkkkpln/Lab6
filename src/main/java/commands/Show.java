@@ -21,7 +21,7 @@ public class Show implements ICommand {
 
     @Override
     public String getDescription() {
-        return "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
+        return "show : output to the standard output stream all the elements of the collection in a string representation";
     }
 }
 

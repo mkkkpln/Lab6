@@ -1,10 +1,10 @@
 package data;
 
 public enum Mood {
-    SORROW ("Печальный"),
-    GLOOM ("Хмурый"),
-    APATHY ("Вялый"),
-    CALM ("Спокойный");
+    SORROW ("Sorrow"),
+    GLOOM ("Gloom"),
+    APATHY ("Apathy"),
+    CALM ("Calm");
 
     private String mean;
     Mood(String name) {

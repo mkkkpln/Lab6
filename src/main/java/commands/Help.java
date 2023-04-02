@@ -19,7 +19,7 @@ public class Help implements ICommand{
 
     @Override
     public String getDescription() {
-        return "help : вывести справку по доступным командам";
+        return "help : output help for available commands";
     }
 
 }

@@ -31,7 +31,8 @@ public class IO {
             }
             catch (NullPointerException ex){
                 System.out.println("No such command found");
-            } catch (WrongScriptException ex) {
+            }
+            catch (WrongScriptException ex) {
                 System.out.println("Script failed");
             }
         }

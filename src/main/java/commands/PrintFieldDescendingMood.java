@@ -34,6 +34,6 @@ public class PrintFieldDescendingMood implements ICommand {
 
     @Override
     public String getDescription() {
-        return "printFieldDescendingMood : вывести значения поля mood всех элементов в порядке убывания";
+        return "printFieldDescendingMood : output the values of the mood field of all elements in descending order";
     }
 }

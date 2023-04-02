@@ -23,6 +23,6 @@ public class Save implements ICommand {
 
     @Override
     public String getDescription() {
-        return "save : сохранить коллекцию в файл";
+        return "save : save the collection to the file";
     }
 }

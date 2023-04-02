@@ -26,6 +26,6 @@ public class Insert implements ICommand {
 
     @Override
     public String getDescription() {
-        return "insert : добавить новый элемент с заданным ключом";
+        return "insert : add a new element with the specified key";
     }
 }

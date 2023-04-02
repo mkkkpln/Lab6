@@ -31,7 +31,7 @@ public class RemoveGreater implements ICommand {
 
     @Override
     public String getDescription() {
-        return "removeGreater null : удалить из коллекции все элементы, превышающие заданный";
+        return "removeGreater null : remove all items from the collection that exceed the specified";
     }
 }
 

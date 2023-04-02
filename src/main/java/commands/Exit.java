@@ -17,6 +17,6 @@ public class Exit implements ICommand{
 
     @Override
     public String getDescription() {
-        return "exit : завершить программу (без сохранения в файл)";
+        return "exit : terminate the program (without saving to a file)";
     }
 }

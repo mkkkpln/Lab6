@@ -23,6 +23,6 @@ public class SumOfImpactSpeed implements ICommand {
 
     @Override
     public String getDescription() {
-        return "sumOfImpactSpeed : вывести сумму значений поля impactSpeed для всех элементов коллекции";
+        return "sumOfImpactSpeed : print the sum of the values of the impactSpeed field for all elements of the collection";
     }
 }

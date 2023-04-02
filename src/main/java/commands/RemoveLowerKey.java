@@ -32,6 +32,6 @@ public class RemoveLowerKey implements ICommand {
 
     @Override
     public String getDescription() {
-        return "removeLowerKey null : удалить из коллекции все элементы, ключ которых меньше, чем заданный";
+        return "removeLowerKey null : remove from the collection all items whose key is less than the specified one";
     }
 }

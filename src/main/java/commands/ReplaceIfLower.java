@@ -45,7 +45,7 @@ public class ReplaceIfLower implements ICommand {
 
     @Override
     public String getDescription() {
-        return "replaceIfLower null {element} : заменить значение по ключу, если новое значение меньше старого";
+        return "replaceIfLower null {element} : replace the value by key if the new value is less than the old one";
     }
 }
 

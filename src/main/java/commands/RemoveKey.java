@@ -25,6 +25,6 @@ public class RemoveKey implements ICommand {
 
     @Override
     public String getDescription() {
-        return "removeKey null : удалить элемент из коллекции по его ключу";
+        return "removeKey null : delete an item from the collection by its key";
     }
 }

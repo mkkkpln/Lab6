@@ -10,10 +10,10 @@ import java.io.IOException;
 public class Coordinates {
     @NotNull
     @XmlElement(name = "x", required=true)
-    private Float x; //Значение поля должно быть больше -598, Поле не может быть null
+    private Float x; //The field value must be greater than -598, can not be null
     @NotNull
     @XmlElement(name = "y", required=true)
-    private Integer y; //Значение поля должно быть больше -67, Поле не может быть null
+    private Integer y; //The field value must be greater than -67, can not be null
 
     public Coordinates(){}
     public Coordinates(Float x, Integer y) {
@@ -29,7 +29,7 @@ public class Coordinates {
         try{
             if (x==null || x <= -598) {
                 System.out.println("Incorrect input!");
-                throw new IOException("Нельзя вводить null или меньше -598");
+                throw new IOException("You can not enter null or less than -598");
             }
             else {
                 this.x = x;
@@ -48,7 +48,7 @@ public class Coordinates {
         try{
             if (y == null || y <= -67) {
                 System.out.println("Incorrect input!");
-                throw new IOException("Нельзя вводить null или меньше -67");
+                throw new IOException("You can not enter null or less than -67");
             }
             else {
                 this.y = y;

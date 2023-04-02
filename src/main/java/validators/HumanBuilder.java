@@ -128,7 +128,7 @@ public class HumanBuilder {
                 Scanner tmp = new Scanner(line);
                 y = tmp.nextInt();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    environment.getPrintStream().println("Try again!");
                     throw new IOException();
 
                 }
@@ -227,7 +227,7 @@ public class HumanBuilder {
 
 
 
-        environment.getPrintStream().println("Enter the sondtrack name");
+        environment.getPrintStream().println("Enter the soundtrack name");
         String musicName = "";
 
         for (int i = 0; i < 3; i++){
@@ -255,14 +255,14 @@ public class HumanBuilder {
 
 
 
-        environment.getPrintStream().println("Create a Car!!!!!");
+        environment.getPrintStream().println("Let's create a car!");
 
 
         Car car = new Car();
         boolean isCool = false;
 
 
-        environment.getPrintStream().println("Is it Cool???? 'yes' or 'no'");
+        environment.getPrintStream().println("Is it Cool? Type 'yes' or 'no'");
         for (int i = 0; i < 3; i++) {
             try {
                 isCool = EditUtil.boolParser(environment.getBufferedReader().readLine());
@@ -287,7 +287,7 @@ public class HumanBuilder {
             }
         }
 
-        environment.getPrintStream().println("Type the name of car!");
+        environment.getPrintStream().println("Type the name of your car!");
         String carName = "";
 
         for (int i = 0; i < 3; i++){

@@ -47,6 +47,6 @@ public class UpdateID implements ICommand {
 
     @Override
     public String getDescription() {
-        return "update id {element} : обновить значение элемента коллекции, id которого равен заданному";
+        return "update id {element} : update the value of a collection item whose id is equal to the specified one";
     }
 }

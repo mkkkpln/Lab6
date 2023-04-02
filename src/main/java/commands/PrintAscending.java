@@ -24,6 +24,6 @@ public class PrintAscending implements ICommand {
 
     @Override
     public String getDescription() {
-        return "printAscending : вывести элементы коллекции в порядке возрастания";
+        return "printAscending : output the elements of the collection in ascending order";
     }
 }

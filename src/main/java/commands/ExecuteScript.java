@@ -21,6 +21,6 @@ public class ExecuteScript implements ICommand {
 
     @Override
     public String getDescription() {
-        return "executeScript fileName : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
+        return "executeScript fileName : read and execute the script from the specified file. The script contains commands in the same form in which they are entered by the user in interactive mode";
     }
 }

@@ -72,7 +72,7 @@ public class CollectionManager {
         for(HashMap.Entry<Long, HumanBeing> entry : this.people.entrySet()){
             Long key = entry.getKey();
             HumanBeing human  = entry.getValue();
-            answer += String.format("Элемент номер : %d\n", counter);
+            answer += String.format("Element number : %d\n", counter);
             counter++;
             answer += String.format("Key : %s\n",key.toString());
             answer += String.format(human.toString()+"\n\n");

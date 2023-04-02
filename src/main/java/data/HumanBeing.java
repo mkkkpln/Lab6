@@ -141,7 +141,7 @@ public class HumanBeing {
     public void setImpactSpeed(float impactSpeed) {
         try{
             if (impactSpeed > 491) {
-                throw new IOException("Максимальное значение поля: 491");
+                throw new IOException("Maximum field value: 491");
             }
             else {
                 this.impactSpeed = impactSpeed;;

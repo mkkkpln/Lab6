@@ -139,7 +139,7 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 y = tmp.nextInt();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    environment.getPrintStream().println("Try again!");
                     throw new IOException();
 
                 }
@@ -171,7 +171,7 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 x = tmp.nextFloat();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
+                    environment.getPrintStream().println("Try again!");
                     throw new IOException();
 
                 }
@@ -212,7 +212,7 @@ public class Validator {
                 }
                 environment.getPrintStream().printf("Invalid input. You have %d attempts\n", 2-i);
             } catch (WrongNameException e) {
-                environment.getPrintStream().println("Use onle A-Z or a-z");
+                environment.getPrintStream().println("Use only A-Z or a-z");
             }
         }
         return name;
@@ -224,13 +224,13 @@ public class Validator {
             try {
                 String input = environment.getBufferedReader().readLine().trim();
                 switch (input){
-                    case  ("Печальный"):
+                    case  ("Sorrow"):
                         return Mood.SORROW;
-                    case ("Хмурый"):
+                    case ("Gloom"):
                         return Mood.GLOOM;
-                    case ("Вялый"):
+                    case ("Apathy"):
                         return Mood.APATHY;
-                    case ("Спокойный"):
+                    case ("Calm"):
                         return Mood.CALM;
                 }
                 mood = Mood.valueOf(input);

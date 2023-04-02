@@ -24,6 +24,6 @@ public class Clear implements ICommand{
 
     @Override
     public String getDescription() {
-        return "clear : очистить коллекцию";
+        return "clear : clear the collection";
     }
 }

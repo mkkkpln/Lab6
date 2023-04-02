@@ -1,8 +1,8 @@
 package data;
 
 public class Car {
-    private String name; //Поле может быть null
-    private Boolean cool; //Поле может быть null
+    private String name; //Can be null
+    private Boolean cool; //Can be null
 
     public String getName() {
         return name;

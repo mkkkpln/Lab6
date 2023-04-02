@@ -7,12 +7,12 @@ public class Info implements ICommand {
 
     @Override
     public void execute(Environment environment, String message) {
-        System.out.println("Ниже представлена вся информация о коллекции:");
+        System.out.println("Below is all the information about the collection:");
         CollectionManager collectionManager = environment.getCollectionManager();
-        System.out.println("Тип коллекции: " + collectionManager.getClass() + ".");
-        System.out.println("Дата инициализации коллекции: " + collectionManager.getCreationDate() + ".");
-        System.out.println("Количество элементов: " + collectionManager.getPeople().size() + ".");
-        System.out.println("Хранимые в коллекции элементы: \n " + collectionManager.getPeople().toString());
+        System.out.println("Collection type: " + collectionManager.getClass() + ".");
+        System.out.println("Date of collection initialization: " + collectionManager.getCreationDate() + ".");
+        System.out.println("Number of elements: " + collectionManager.getPeople().size() + ".");
+        System.out.println("Items stored in the collection: \n " + collectionManager.getPeople().toString());
         environment.getPrintStream().println("Command finished successfully!");
     }
 
@@ -23,6 +23,6 @@ public class Info implements ICommand {
 
     @Override
     public String getDescription() {
-        return "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)";
+        return "info : output information about the collection (type, initialization date, number of items, etc.) to the standard output stream.";
     }
 }
