@@ -29,9 +29,6 @@ public class IO {
             catch (IOException ex){
                 System.out.println("Incorrect input and output");
             }
-            catch (NullPointerException ex){
-                System.out.println("No such command found");
-            }
             catch (WrongScriptException ex) {
                 System.out.println("Script failed");
             }
@@ -68,7 +65,6 @@ public class IO {
         } catch (IOException e) {
             environment.setPointer(environment.getPointer()-1);
             throw new RuntimeException(e);
-
         } catch (WrongScriptException e) {
             environment.getPrintStream().println("Your script has errors!");
             environment.setPointer(environment.getPointer()-1);
