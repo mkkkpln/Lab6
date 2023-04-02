@@ -15,6 +15,7 @@ public class Invoker {
      * @param environment - среда, где хранится история, все команды, коллекция, поток вывода на экран
      * @param commands - команды
      */
+
     public Invoker(Environment environment, ICommand[] commands){
         this.environment = environment;
         for (ICommand command:commands) {

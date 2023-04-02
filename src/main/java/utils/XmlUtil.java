@@ -44,7 +44,6 @@ public class XmlUtil {
             }
             environment.getPrintStream().println("File is not found");
             return false;
-
         } catch (PropertyException e) {
             if(environment.getPointer()>0){
                 throw new WrongScriptException();
