@@ -28,6 +28,7 @@ public class Coordinates {
     public void setX(Float x) {
         try{
             if (x==null || x <= -598) {
+                System.out.println("Incorrect input!");
                 throw new IOException("Нельзя вводить null или меньше -598");
             }
             else {
@@ -46,6 +47,7 @@ public class Coordinates {
     public void setY(Integer y) {
         try{
             if (y == null || y <= -67) {
+                System.out.println("Incorrect input!");
                 throw new IOException("Нельзя вводить null или меньше -67");
             }
             else {

@@ -16,6 +16,7 @@ public class HumanBuilder {
     public HumanBeing buildHuman(Environment environment) throws WrongScriptException, BuilderException {
         HumanBeing newHuman = new HumanBeing();
 
+
         Long id = (long) (environment.getCollectionManager().getPeople().size()+1);
         newHuman.setId(id);
 
@@ -49,6 +50,7 @@ public class HumanBuilder {
                 }
             }
         }
+
 
         newHuman.setName(name);
 
@@ -87,23 +89,10 @@ public class HumanBuilder {
 
         Mood mood = Mood.CALM;
 
-        for (int i = 0; i < 3; i++) {
-            try {
-                String input = environment.getBufferedReader().readLine();
-                mood = Mood.valueOf(input);
-                break;
-            } catch (IOException | NullPointerException | IllegalArgumentException e) {
-                if(environment.getPointer()>0){
-                    throw new WrongScriptException();
-                }
-                if(i==2){
-                    environment.getPrintStream().println("Command failed!");
-                    throw new BuilderException();
-
-                }
-                environment.getPrintStream().println("Invalid input");
-                environment.getPrintStream().printf("You have %d attempts\n", 2-i);
-            }
+        try {
+            mood = Validator.moodParser(environment);
+        } catch (WrongArgumentException e) {
+            throw new BuilderException();
         }
 
 
@@ -298,7 +287,7 @@ public class HumanBuilder {
             }
         }
 
-        environment.getPrintStream().println("type the name!");
+        environment.getPrintStream().println("Type the name of car!");
         String carName = "";
 
         for (int i = 0; i < 3; i++){
@@ -323,6 +312,7 @@ public class HumanBuilder {
         car.setName(carName);
         car.setCool(isCool);
         newHuman.setCar(car);
+        environment.getPrintStream().println("Command finished!");
         return newHuman;
     }
 }

@@ -5,6 +5,7 @@ import utils.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Validator {
@@ -75,7 +76,10 @@ public class Validator {
                 throw new WrongNameException();
             }
         }
+
         return name;
+
+
     }
 
 
@@ -121,6 +125,7 @@ public class Validator {
         return variable;
     }
 
+
     public static Integer integerParser(Environment environment) throws WrongScriptException, WrongArgumentException {
         BufferedReader in = environment.getBufferedReader();
         int y = 0;
@@ -134,8 +139,9 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 y = tmp.nextInt();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Try again!");
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
                     throw new IOException();
+
                 }
                 break;
             } catch (Exception e){
@@ -165,7 +171,7 @@ public class Validator {
                 Scanner tmp = new Scanner(line);
                 x = tmp.nextFloat();
                 if (line.split(" ").length > 1) {
-                    environment.getPrintStream().println("Try again!");
+                    environment.getPrintStream().println("Попробуйте ещё раз ввести число!");
                     throw new IOException();
 
                 }
@@ -196,7 +202,6 @@ public class Validator {
                 }
                 name = Validator.nameParser(name);
                 return name;
-
             } catch (IOException e) {
                 if(environment.getPointer()>0){
                     throw new WrongScriptException();
@@ -213,21 +218,30 @@ public class Validator {
         return name;
     }
 
-    public static Mood moodParser(Environment environment) throws WrongArgumentException, WrongScriptException {
+    public static Mood moodParser(Environment environment) throws WrongArgumentException, WrongScriptException, BuilderException {
         Mood mood = Mood.CALM;
         for (int i = 0; i < 3; i++) {
             try {
-                String input = environment.getBufferedReader().readLine();
+                String input = environment.getBufferedReader().readLine().trim();
+                switch (input){
+                    case  ("Печальный"):
+                        return Mood.SORROW;
+                    case ("Хмурый"):
+                        return Mood.GLOOM;
+                    case ("Вялый"):
+                        return Mood.APATHY;
+                    case ("Спокойный"):
+                        return Mood.CALM;
+                }
                 mood = Mood.valueOf(input);
-                return mood;
-
+                break;
             } catch (IOException | NullPointerException | IllegalArgumentException e) {
                 if(environment.getPointer()>0){
                     throw new WrongScriptException();
                 }
                 if(i==2){
                     environment.getPrintStream().println("Command failed!");
-                    throw new WrongArgumentException();
+                    throw new BuilderException();
                 }
                 environment.getPrintStream().println("Invalid input");
                 environment.getPrintStream().printf("You have %d attempts\n", 2-i);

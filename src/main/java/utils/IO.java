@@ -5,19 +5,31 @@ import commands.Invoker;
 import java.io.*;
 
 public class IO {
-    public static void commandReader(Environment environment, Invoker invoker) {
+    private static final char ctrlD = 0x4;
+    private static final char ctrlC = 0x3;
+    public static void commandReader(Environment environment, Invoker invoker){
         BufferedReader reader = environment.getBufferedReader();
         System.out.println("Type 'help' to see commands");
-        while (true) {
+        while(true){
             System.out.print("-> ");
             try {
                 String userTyping = reader.readLine();
+                if(userTyping==null){
+                    environment.getPrintStream().println("Finishing process.\nProgram finished");
+                    System.exit(0);
+                }
+                for(int i = 0; i < userTyping.length(); i++){
+                    if(userTyping.toCharArray()[i]==ctrlD || userTyping.toCharArray()[i]==ctrlC){
+                        environment.getPrintStream().println("Finishing process.\nProgram finished");
+                        System.exit(0);
+                    }
+                }
                 invoker.executer(userTyping);
-            } catch (InterruptedIOException e) {
-                System.out.println("Error - ctrl+c \nCommand finished unsuccessfully");
-            } catch (IOException ex) {
+            }
+            catch (IOException ex){
                 System.out.println("Incorrect input and output");
-            } catch (NullPointerException ex) {
+            }
+            catch (NullPointerException ex){
                 System.out.println("No such command found");
             } catch (WrongScriptException ex) {
                 System.out.println("Script failed");
@@ -34,6 +46,16 @@ public class IO {
             environment.setBufferedReader(bufferedReader);
             String userLine = bufferedReader.readLine();
             while (!userLine.equals("EOF")){
+                if(userLine==null){
+                    environment.getPrintStream().println("Finishing process.\nProgram finished");
+                    System.exit(0);
+                }
+                for(int i = 0; i < userLine.length(); i++){
+                    if(userLine.toCharArray()[i]==ctrlD || userLine.toCharArray()[i]==ctrlC){
+                        environment.getPrintStream().println("Finishing process.\nProgram Finished"
+                        );System.exit(0);
+                    }
+                }
                 invoker.executer(userLine);
                 userLine = bufferedReader.readLine();
             }
@@ -56,3 +78,4 @@ public class IO {
         environment.setPointer(environment.getPointer()+1);
     }
 }
+
