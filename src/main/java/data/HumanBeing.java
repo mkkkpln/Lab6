@@ -226,17 +226,17 @@ public class HumanBeing {
     }
     @Override
     public String toString() {
-        String answer ="";
-        answer+= String.format("ID : %d\n",id);
-        answer+= String.format("Имя : " + name + "\n");
-        answer+= String.format("Дата рождения : " + creationDate.toString() + "\n");
-        answer+= String.format("Скорость : %.3f\n", impactSpeed);
-        answer+= String.format("Название саундтрека : " + soundtrackName + "\n");
-        answer+= String.format("Минуты ожидания : %.3f\n", minutesOfWaiting);
-        answer+= String.format("Машина : " + car.toString() + "\n");
-        answer+= String.format("Настроение : " + mood + "\n");
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("ID : %d",id)).append("\n");
+        builder.append(String.format("Name : " + name)).append("\n");
+        builder.append(String.format("Creation Date : " + creationDate.toString())).append("\n");
+        builder.append(String.format("Speed : %.3f", impactSpeed)).append("\n");
+        builder.append(String.format("Name of the soundtrack : " + soundtrackName)).append("\n");
+        builder.append(String.format("Minutes of waiting : %.3f", minutesOfWaiting)).append("\n");
+        builder.append(String.format("Машина : " + car.toString())).append("\n");
+        builder.append(String.format("Настроение : " + mood)).append("\n");
 
-        return answer;
+        return builder.toString();
     }
 
     public int compareTo(HumanBeing o) {
