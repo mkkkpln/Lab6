@@ -67,16 +67,17 @@ public class CollectionManager {
 
     @Override
     public String toString() {
-        String answer = "";
         int counter = 1;
+        StringBuilder builder = new StringBuilder();
         for(HashMap.Entry<Long, HumanBeing> entry : this.people.entrySet()){
             Long key = entry.getKey();
             HumanBeing human  = entry.getValue();
-            answer += String.format("Element number : %d\n", counter);
+            builder.append(String.format("Element number : %d", counter)).append("\n");
             counter++;
-            answer += String.format("Key : %s\n",key.toString());
-            answer += String.format(human.toString()+"\n\n");
+            builder.append(String.format("Key : %s",key.toString())).append("\n");
+            builder.append(String.format(human.toString()+"\n\n")).append("\n");
         }
-        return answer;
+        String result = builder.toString();
+        return result;
     }
 }
