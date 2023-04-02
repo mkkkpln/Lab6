@@ -16,7 +16,7 @@ public class Main {
         CollectionManager manager;
 
         //Загрузим коллекцию из файла
-        String link = "meme.xml";
+        String link = args[0];
         manager = XmlUtil.XMLParser(link);
 
 
