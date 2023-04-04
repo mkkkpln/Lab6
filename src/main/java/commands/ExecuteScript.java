@@ -2,6 +2,7 @@ package commands;
 
 import utils.Environment;
 import utils.IO;
+import utils.NoSuchCommandException;
 import utils.WrongScriptException;
 
 import java.io.*;
@@ -10,7 +11,7 @@ public class ExecuteScript implements ICommand {
 
 
     @Override
-    public void execute(Environment environment, String message) {
+    public void execute(Environment environment, String message) throws NoSuchCommandException {
         IO.scriptReader(environment, message);
     }
 

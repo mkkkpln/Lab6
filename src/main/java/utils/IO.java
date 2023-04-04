@@ -1,5 +1,6 @@
 package utils;
 
+import commands.ICommand;
 import commands.Invoker;
 
 import java.io.*;
@@ -7,7 +8,7 @@ import java.io.*;
 public class IO {
     private static final char ctrlD = 0x4;
     private static final char ctrlC = 0x3;
-    public static void commandReader(Environment environment, Invoker invoker){
+    public static void commandReader(Environment environment, Invoker invoker)  {
         BufferedReader reader = environment.getBufferedReader();
         System.out.println("Type 'help' to see commands");
         while(true){
@@ -24,6 +25,17 @@ public class IO {
                         System.exit(0);
                     }
                 }
+                ICommand tryCommand = null;
+                for(ICommand command: environment.getAllCommands()){
+                    if(command.getName().equals(userTyping)){
+                        tryCommand = command;
+                        break;
+                    }
+                }
+                if(tryCommand==null){
+                    environment.getPrintStream().println("No such command!");
+                    continue;
+                }
                 invoker.executer(userTyping);
             }
             catch (IOException ex){
@@ -31,10 +43,12 @@ public class IO {
             }
             catch (WrongScriptException ex) {
                 System.out.println("Script failed");
+            } catch (NoSuchCommandException e) {
+                environment.getPrintStream().println("No command!!!");
             }
         }
     }
-    public static void scriptReader(Environment environment,  String message){
+    public static void scriptReader(Environment environment,  String message) throws NoSuchCommandException {
         incPointer(environment);
         Invoker invoker = new Invoker(environment, environment.getAllCommands());
         try{
@@ -54,6 +68,17 @@ public class IO {
                         );System.exit(0);
                     }
                 }
+                ICommand tryCommand = null;
+                for(ICommand command: environment.getAllCommands()){
+                    if(command.getName().equals(userLine)){
+                        tryCommand = command;
+                        break;
+                    }
+                }
+                if(tryCommand==null){
+                    throw new WrongScriptException();
+                }
+                invoker.executer(userLine);
                 invoker.executer(userLine);
                 userLine = bufferedReader.readLine();
             }

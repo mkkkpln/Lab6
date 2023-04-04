@@ -1,6 +1,7 @@
 package commands;
 
 import utils.Environment;
+import utils.NoSuchCommandException;
 import utils.WrongScriptException;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class Invoker {
      * User word processing.
      * @param message - сообщение, введённое в консоль
      */
-    public void executer(String message) throws WrongScriptException {
+    public void executer(String message) throws WrongScriptException, NoSuchCommandException {
         if (message.split(" ").length > 1) {
             System.setOut(System.out);
             String[] mem = message.split(" ");
