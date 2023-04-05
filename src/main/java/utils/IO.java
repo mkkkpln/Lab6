@@ -27,7 +27,7 @@ public class IO {
                 }
                 ICommand tryCommand = null;
                 for(ICommand command: environment.getAllCommands()){
-                    if(command.getName().equals(userTyping)){
+                    if(command.getName().equals(userTyping.split(" ")[0])){
                         tryCommand = command;
                         break;
                     }
@@ -70,7 +70,7 @@ public class IO {
                 }
                 ICommand tryCommand = null;
                 for(ICommand command: environment.getAllCommands()){
-                    if(command.getName().equals(userLine)){
+                    if(command.getName().equals(userLine.split(" ")[0])){
                         tryCommand = command;
                         break;
                     }
@@ -78,7 +78,6 @@ public class IO {
                 if(tryCommand==null){
                     throw new WrongScriptException();
                 }
-                invoker.executer(userLine);
                 invoker.executer(userLine);
                 userLine = bufferedReader.readLine();
             }

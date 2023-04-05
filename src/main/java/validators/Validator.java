@@ -226,11 +226,27 @@ public class Validator {
                 switch (input){
                     case  ("Sorrow"):
                         return Mood.SORROW;
+                    case  ("sorrow"):
+                        return Mood.SORROW;
+                    case  ("1"):
+                        return Mood.SORROW;
                     case ("Gloom"):
+                        return Mood.GLOOM;
+                    case ("gloom"):
+                        return Mood.GLOOM;
+                    case ("2"):
                         return Mood.GLOOM;
                     case ("Apathy"):
                         return Mood.APATHY;
+                    case ("apathy"):
+                        return Mood.APATHY;
+                    case ("3"):
+                        return Mood.APATHY;
                     case ("Calm"):
+                        return Mood.CALM;
+                    case ("calm"):
+                        return Mood.CALM;
+                    case ("4"):
                         return Mood.CALM;
                 }
                 mood = Mood.valueOf(input);
