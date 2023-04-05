@@ -9,7 +9,6 @@ import java.io.*;
 
 public class ExecuteScript implements ICommand {
 
-
     @Override
     public void execute(Environment environment, String message) throws NoSuchCommandException {
         IO.scriptReader(environment, message);
