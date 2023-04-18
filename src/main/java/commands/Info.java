@@ -12,7 +12,6 @@ public class Info implements ICommand {
         System.out.println("Collection type: " + collectionManager.getClass() + ".");
         System.out.println("Date of collection initialization: " + collectionManager.getCreationDate() + ".");
         System.out.println("Number of elements: " + collectionManager.getPeople().size() + ".");
-        System.out.println("Items stored in the collection: \n " + collectionManager.getPeople().toString());
         environment.getPrintStream().println("Command finished successfully!");
     }
 

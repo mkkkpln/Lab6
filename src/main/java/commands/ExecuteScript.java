@@ -6,12 +6,15 @@ import utils.NoSuchCommandException;
 import utils.WrongScriptException;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class ExecuteScript implements ICommand {
 
+    private final ArrayList<String> historyCallsFile = new ArrayList<>();
+
     @Override
     public void execute(Environment environment, String message) throws NoSuchCommandException {
-        IO.scriptReader(environment, message);
+        IO.scriptReader(environment, message, historyCallsFile);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class XmlUtil {
             if(environment.getPointer()>0){
                 throw new WrongScriptException();
             }
-            environment.getPrintStream().println("File is not found");
+            environment.getPrintStream().println("File is not found or no property, check it again please");
             return false;
         } catch (PropertyException e) {
             if(environment.getPointer()>0){
@@ -168,5 +168,3 @@ public class XmlUtil {
         return collectionManager;
     }
 }
-
-

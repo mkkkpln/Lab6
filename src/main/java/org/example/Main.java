@@ -27,11 +27,9 @@ public class Main {
                     manager = XmlUtil.XMLParser(link);
 
                 } catch (ParserConfigurationException | IOException e) {
-                    System.err.println("ParserConfigurationException or IOException caught...");
-                    e.printStackTrace();
+                    System.out.println("IO exception. (No file or not allowed to use it)\ncollection will be empty!");
                 } catch (SAXException e) {
-                    System.err.println("SAXException caught...");
-                    e.printStackTrace();
+                    System.out.println("Incorrect file, collection will be empty");
                 }
             }
         }

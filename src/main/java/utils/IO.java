@@ -4,6 +4,7 @@ import commands.ICommand;
 import commands.Invoker;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class IO {
     private static final char ctrlD = 0x4;
@@ -48,7 +49,7 @@ public class IO {
             }
         }
     }
-    public static void scriptReader(Environment environment,  String message) throws NoSuchCommandException {
+    public static void scriptReader(Environment environment, String message, ArrayList<String> historyCallsFile) throws NoSuchCommandException {
         incPointer(environment);
         Invoker invoker = new Invoker(environment, environment.getAllCommands());
         try{
@@ -78,6 +79,11 @@ public class IO {
                 if(tryCommand==null){
                     throw new WrongScriptException();
                 }
+                if(historyCallsFile.contains(userLine)){
+                    environment.getPrintStream().println("Endless recursion");
+                    throw new RecursionScriptException();
+                }
+                historyCallsFile.add(userLine);
                 invoker.executer(userLine);
                 userLine = bufferedReader.readLine();
             }
@@ -92,6 +98,9 @@ public class IO {
         } catch (WrongScriptException e) {
             environment.getPrintStream().println("Your script has errors!");
             environment.setPointer(environment.getPointer()-1);
+        } catch (RecursionScriptException e) {
+            environment.getPrintStream().println("Recursion found!");
+            throw new RuntimeException(e);
         }
     }
 
@@ -99,4 +108,3 @@ public class IO {
         environment.setPointer(environment.getPointer()+1);
     }
 }
-

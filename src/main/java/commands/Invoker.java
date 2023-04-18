@@ -45,7 +45,7 @@ public class Invoker {
             commandHashMap.get(message.split(" ")[0]).execute(environment, messageNext);
         } else {
             System.setOut(System.out);
-            commandHashMap.get(message).execute(environment,"");
+            commandHashMap.get(message.trim()).execute(environment,"");
         }
     }
 
