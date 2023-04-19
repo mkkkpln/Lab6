@@ -58,11 +58,7 @@ public class IO {
             BufferedReader bufferedReader = new BufferedReader(reader);
             environment.setBufferedReader(bufferedReader);
             String userLine = bufferedReader.readLine();
-            while (!userLine.equals("EOF")){
-                if(userLine==null){
-                    environment.getPrintStream().println("Finishing process.\nProgram finished");
-                    System.exit(0);
-                }
+            while (userLine != null && !userLine.equals("EOF") ){
                 for(int i = 0; i < userLine.length(); i++){
                     if(userLine.toCharArray()[i]==ctrlD || userLine.toCharArray()[i]==ctrlC){
                         environment.getPrintStream().println("Finishing process.\nProgram Finished"
@@ -80,13 +76,14 @@ public class IO {
                     throw new WrongScriptException();
                 }
                 if(historyCallsFile.contains(userLine)){
-                    environment.getPrintStream().println("Endless recursion");
                     throw new RecursionScriptException();
                 }
                 historyCallsFile.add(userLine);
                 invoker.executer(userLine);
+                historyCallsFile.remove(historyCallsFile.size()-1);
                 userLine = bufferedReader.readLine();
             }
+
             environment.setPointer(environment.getPointer()-1);
 
         } catch (FileNotFoundException e) {
@@ -97,10 +94,9 @@ public class IO {
             throw new RuntimeException(e);
         } catch (WrongScriptException e) {
             environment.getPrintStream().println("Your script has errors!");
-            environment.setPointer(environment.getPointer()-1);
         } catch (RecursionScriptException e) {
             environment.getPrintStream().println("Recursion found!");
-            throw new RuntimeException(e);
+            environment.setPointer(environment.getPointer()-1);
         }
     }
 

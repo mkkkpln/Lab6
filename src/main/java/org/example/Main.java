@@ -1,6 +1,7 @@
 package org.example;
 
 import commands.*;
+import jakarta.xml.bind.JAXBException;
 import managers.CollectionManager;
 import org.xml.sax.SAXException;
 import utils.*;
@@ -30,6 +31,11 @@ public class Main {
                     System.out.println("IO exception. (No file or not allowed to use it)\ncollection will be empty!");
                 } catch (SAXException e) {
                     System.out.println("Incorrect file, collection will be empty");
+                    try {
+                        throw new WrongArgumentException();
+                    } catch (WrongArgumentException ex) {
+                        System.out.println("Incorrect file, collection will be empty");
+                    }
                 }
             }
         }

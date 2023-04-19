@@ -72,7 +72,16 @@ public class HumanBeing {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        try {
+            if (id==null || id <= 0){
+                throw new IOException("You can not put NULL and lower 0 in id.");
+            }
+            else {
+                this.id = id;
+            }
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public String getName() {
@@ -81,7 +90,7 @@ public class HumanBeing {
 
     public void setName(String name) {
         try {
-            if (name==null){
+            if (name==null || name.isEmpty()){
                 throw new IOException("You can not put NULL in name.");
             }
             else {

@@ -113,7 +113,8 @@ public class XmlUtil {
                                                 if (variable.getNodeType() == Node.ELEMENT_NODE) {
                                                     switch (variable.getNodeName()) {
                                                         case "x" -> {
-                                                            float x = Float.parseFloat(variable.getTextContent());
+                                                            String xLine = variable.getTextContent();
+                                                            float x = Float.parseFloat(xLine.replace(",", "."));
                                                             coordinates.setX(x);
                                                         }
                                                         case "y" -> {
