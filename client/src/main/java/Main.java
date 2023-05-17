@@ -5,3 +5,5 @@ public final class Main {
     new Client(new DefaultConfiguration()).run();
   }
 }
+
+// java -jar client/build/libs/client-1.0-SNAPSHOT-all.jar

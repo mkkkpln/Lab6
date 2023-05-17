@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
+
+// сохраняет и загружает файл, в котором хранится коллекция
 public final record PersistenceManager(CollectionManager collection) {
   public PersistenceManager() {
     this(new CollectionManager());
